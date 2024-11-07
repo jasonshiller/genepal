@@ -3,13 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.5.0dev - [29-Oct-2024]
+## v0.5.0dev - [07-Nov-2024]
 
 ### `Added`
 
 1. Added MultiQC [#65](https://github.com/plant-food-research-open/genepal/issues/65)
 2. Updated nf-core template to 3.0.2 [#66](https://github.com/PlantandFoodResearch/genepal/issues/66)
 3. Integrated nf-test into pipeline CI [#68](https://github.com/PlantandFoodResearch/genepal/issues/68)
+4. Updated the flowchart [#87](https://github.com/PlantandFoodResearch/genepal/issues/87)
 
 ### `Fixed`
 

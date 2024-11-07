@@ -18,18 +18,35 @@
 
 <p align="center"><img src="docs/img/genepal.png"></p>
 
-- [FASTA VALIDATOR](https://github.com/linsalrob/fasta_validator): Validate genome fasta
-- [REPEATMODELER](https://github.com/Dfam-consortium/RepeatModeler) or [EDTA](https://github.com/oushujun/EDTA): Create TE library
-- [REPEATMASKER](https://github.com/rmhubley/RepeatMasker): Soft mask the genome fasta
-- [FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc), [FASTP](https://github.com/OpenGene/fastp), [SORTMERNA](https://github.com/sortmerna/sortmerna): QC, trim and filter RNASeq evidence
+- [fasta_validator](https://github.com/linsalrob/fasta_validator): Validate genome FASTA
+- [RepeatModeler](https://github.com/Dfam-consortium/RepeatModeler) or [EDTA](https://github.com/oushujun/EDTA): Create TE library
+- [RepeatMasker](https://github.com/rmhubley/RepeatMasker): Soft mask the genome fasta
+- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc), [fastp](https://github.com/OpenGene/fastp), [SortMeRNA](https://github.com/sortmerna/sortmerna): QC, trim and filter RNASeq evidence
 - [STAR](https://github.com/alexdobin/STAR): RNASeq alignment
-- [BRAKER](https://github.com/Gaius-Augustus/BRAKER): Annotate the genome fasta
-- [LIFTOFF](https://github.com/agshumate/Liftoff): Liftoff annotations from reference genome fasta/gff
-- [TSEBRA](https://github.com/Gaius-Augustus/TSEBRA), [AGAT](https://github.com/NBISweden/AGAT): Merge BRAKER and Liftoff annotations
-- [EGGNOG-MAPPER](https://github.com/eggnogdb/eggnog-mapper): Add functional annotation to gff
-- [ORTHOFINDER](https://github.com/davidemms/OrthoFinder): Perform phylogenetic orthology inference across input genomes
-- [GENOMETOOLS](https://github.com/genometools/genometools), [GFFREAD](https://github.com/gpertea/gffread): Final GFF format validation and extraction of protein sequences
+  - Directly provided BAM files should be `--outSAMstrandField intronMotif` compliant
+- [cat](https://github.com/coreutils/coreutils/blob/master/src/cat.c): Concatenate protein FASTA files
+- [BRAKER](https://github.com/Gaius-Augustus/BRAKER): Annotate the genome FASTA
+  - With protein evidence alone, [BRAKER workflow C](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
+  - With protein plus RNASeq evidence, [BRAKER workflow D](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
+- [Liftoff](https://github.com/agshumate/Liftoff): Optionally, liftoff annotations from reference genome FASTA/GFF
+- [TSEBRA](https://github.com/Gaius-Augustus/TSEBRA)
+  - Ensure that each BRAKER model has [full intron support](./docs/usage.md#iso-forms-and-full-intron-support)
+  - Optionally, ensure that each Liftoff model has full intron support
+- [AGAT](https://github.com/NBISweden/AGAT)
+  - Merge multi-reference liftoffs
+  - Remove liftoff transcripts marked by _valid_ORF=False_
+  - Optionally, allow or remove iso-forms
+  - Remove BRAKER models from Liftoff loci
+  - Optionally, remove models without any EggNOG-mapper hits
+  - Merge Liftoff and BRAKER models
+- [EggNOG-mapper](https://github.com/eggnogdb/eggnog-mapper): Add functional annotation to gff
+- [GenomeTools](https://github.com/genometools/genometools): GFF format validation
+- [GffRead](https://github.com/gpertea/gffread): Extraction of protein sequences
+- [OrthoFinder](https://github.com/davidemms/OrthoFinder): Perform phylogenetic orthology inference across genomes
+- [GffCompare](https://github.com/gpertea/gffcompare): Compare and benchmark against an existing annotation
 - [BUSCO](https://gitlab.com/ezlab/busco): Completeness statistics for genome and annotation through proteins
+- [R Markdown](https://rmarkdown.rstudio.com): Specialized pangene report
+- [MultiQC](https://docs.seqera.io/multiqc): Exhaustive QC statistics
 
 ## Usage
 

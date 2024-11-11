@@ -3,6 +3,7 @@ include { GUNZIP as GUNZIP_GFF                                  } from '../../mo
 include { GFFREAD as GFFREAD_BEFORE_LIFTOFF                     } from '../../modules/nf-core/gffread/main'
 include { LIFTOFF                                               } from '../../modules/nf-core/liftoff/main'
 include { AGAT_SPMERGEANNOTATIONS as MERGE_LIFTOFF_ANNOTATIONS  } from '../../modules/nf-core/agat/spmergeannotations/main'
+include { AGAT_SPFLAGSHORTINTRONS                               } from '../../modules/gallvp/agat/spflagshortintrons/main'
 include { AGAT_SPFILTERFEATUREFROMKILLLIST                      } from '../../modules/nf-core/agat/spfilterfeaturefromkilllist/main'
 include { GFFREAD as GFFREAD_AFTER_LIFTOFF                      } from '../../modules/nf-core/gffread/main'
 include { GFF_TSEBRA_SPFILTERFEATUREFROMKILLLIST                } from '../../subworkflows/local/gff_tsebra_spfilterfeaturefromkilllist'
@@ -112,8 +113,16 @@ workflow FASTA_LIFTOFF {
                                     )
     ch_versions                     = ch_versions.mix(MERGE_LIFTOFF_ANNOTATIONS.out.versions.first())
 
+    // MODULE: AGAT_SPFLAGSHORTINTRONS
+    AGAT_SPFLAGSHORTINTRONS ( ch_merged_gff, [] )
+
+    ch_flagged_gff                  = AGAT_SPFLAGSHORTINTRONS.out.gff
+    ch_versions                     = ch_versions.mix(AGAT_SPFLAGSHORTINTRONS.out.versions.first())
+
     // COLLECTFILE: Kill list for valid_ORF=False transcripts
-    ch_kill_list                    = ch_merged_gff
+    // tRNA, rRNA
+    // gene with any intron marked as 'pseudo=' by AGAT/SPFLAGSHORTINTRONS
+    ch_kill_list                    = ch_flagged_gff
                                     | map { meta, gff ->
 
                                         def tx_from_gff = gff.readLines()
@@ -122,10 +131,12 @@ workflow FASTA_LIFTOFF {
 
                                                 def cols = it.split('\t')
                                                 def feat = cols[2]
-                                                if ( ! ( feat == 'transcript' || feat == 'mRNA' ) ) { return false }
+
+                                                if ( feat in [ 'tRNA', 'rRNA' ] ) { return true }
+                                                if ( feat !in [ 'transcript', 'mRNA', 'gene' ] ) { return false }
 
                                                 def attrs = cols[8]
-                                                attrs.contains('valid_ORF=False')
+                                                ( attrs.contains('valid_ORF=False') || attrs.contains('pseudo=') )
                                             }
                                             .collect {
                                                 def cols    = it.split('\t')
@@ -144,7 +155,7 @@ workflow FASTA_LIFTOFF {
                                     }
 
     // MODULE: AGAT_SPFILTERFEATUREFROMKILLLIST
-    ch_agat_kill_inputs             = ch_merged_gff
+    ch_agat_kill_inputs             = ch_flagged_gff
                                     | join(ch_kill_list)
 
 

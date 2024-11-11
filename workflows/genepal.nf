@@ -24,6 +24,7 @@ include { GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES } from '../subworkflows
 
 include { CAT_CAT as SAVE_MARKED_GFF3           } from '../modules/nf-core/cat/cat/main'
 include { GFFCOMPARE as BENCHMARK               } from '../modules/nf-core/gffcompare/main'
+include { FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP  } from '../subworkflows/local/file_gunzip'
 include { MULTIQC                               } from '../modules/nf-core/multiqc/main'
 
 include { methodsDescriptionText                } from '../subworkflows/local/utils_nfcore_genepal_pipeline'
@@ -247,10 +248,15 @@ workflow GENEPAL {
     // MODULE: CAT_CAT as SAVE_MARKED_GFF3
     SAVE_MARKED_GFF3 ( ch_splicing_marked_gff3 )
 
+    // SUBWORKFLOW: FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP
+    BENCHMARK_GFF3_GUNZIP ( ch_benchmark_gff )
+    ch_benchmark_gunzip_gff     = BENCHMARK_GFF3_GUNZIP.out.gunzip
+    ch_versions                 = ch_versions.mix(BENCHMARK_GFF3_GUNZIP.out.versions)
+
     // MODULE: GFFCOMPARE as BENCHMARK
     ch_benchmark_inputs         = ch_final_gff
                                 | join ( ch_valid_target_assembly )
-                                | join ( ch_benchmark_gff )
+                                | join ( ch_benchmark_gunzip_gff )
 
     BENCHMARK (
         ch_benchmark_inputs.map { meta, gff, fasta, ref_gff -> [ meta, gff ] },

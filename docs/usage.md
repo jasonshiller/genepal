@@ -5,6 +5,7 @@
 > This document does not describe every pipeline parameter. For an exhaustive list of parameters, see [parameters.md](./parameters.md).
 
 - [Assemblysheet input](#assemblysheet-input)
+  - [Advanced inputs for manual resume](#advanced-inputs-for-manual-resume)
 - [Protein evidence](#protein-evidence)
   - [BRAKER workflow](#braker-workflow)
 - [RNASeq evidence](#rnaseq-evidence)
@@ -39,7 +40,17 @@ You will need to create an assemblysheet with information about the genome assem
 - `tag:` A unique tag which represents the target assembly throughout the pipeline. The `tag` and `fasta` file name should not be same, such as `tag.fasta`. This can create file name collisions in the pipeline or result in file overwrite. It is also a good-practice to make all the input files read-only.
 - `fasta:` FASTA file for the genome
 - `is_masked:` Whether the FASTA is masked or not? Use yes/no to indicate the masking. If the assembly is not masked. The pipeline will soft mask it before annotating it.
-- `te_lib [Optional]`: If an assembly is not masked and a TE library is available which cna be used to mask the assembly, the path of the TE library FASTA file can be provided here. If this column is absent and the assembly is not masked, the pipeline will first create a TE library so that it can soft mask the assembly.
+- `te_lib [Optional]:` If an assembly is not masked and a TE library is available which cna be used to mask the assembly, the path of the TE library FASTA file can be provided here. If this column is absent and the assembly is not masked, the pipeline will first create a TE library so that it can soft mask the assembly.
+- `benchmark [Optional]:` A GFF3 file which can be used to benchmark or compare the results of the pipeline against an existing annotation.
+
+### Advanced inputs for manual resume
+
+If the pipeline fails while processing large datasets, it is advisable to backup the repeat-masked genomes and the BRAKER outputs before attempting a [Nextflow resume](https://www.nextflow.io/docs/latest/cache-and-resume.html#caching-and-resuming). If the resume fails, these outputs from the first pipeline run can be used to setup a manual resume. This can be achieved by providing the repeat-masked genomes under the `fasta` column along with `is_masked` column set to `yes`. The BRAKER outputs can be provided under the following columns,
+
+- `braker_gff3 [Optional]:` BRAKER GFF3 file
+- `braker_hints [Optional]:` BRAKER hints file in GFF3 format
+
+The pipeline will automatically skip the repeat modelling, masking and BRAKER steps. It will still perform these steps for those genomes for which these files are not provided. These files are not saved by the pipeline by default. To save the files, set the `repeatmasker_save_outputs` and `braker_save_outputs` parameters to `true`.
 
 ## Protein evidence
 

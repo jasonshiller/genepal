@@ -17,6 +17,6 @@ nextflow run \
     -profile docker,test_full \
     -resume \
     $stub \
-    --eggnogmapper_tax_scope 33090 \
+    -c ../nxf-config/resources.config \
     --eggnogmapper_db_dir ../dbs/emapperdb/5.0.2 \
     --outdir results

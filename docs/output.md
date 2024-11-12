@@ -119,7 +119,7 @@ RNASeq alignment is performed with [STAR](https://github.com/alexdobin/STAR). Al
 >
 > BRAKER outputs are not the final outputs from the pipeline and that's why they are not stored by default. These are only intermediary files.
 >
-> The pipeline further processes the BRAKER predictions and stores the final validated outputs in the `annotations` directory. The `braker_save_outputs` option is only provided to allow a manual resume of the pipeline for advanced use cases.
+> The pipeline further processes the BRAKER predictions and stores the final validated outputs in the `annotations` directory. The `braker_save_outputs` option is only provided to allow a manual resume of the pipeline for advanced use cases. See [Advanced inputs for manual resume](./usage.md#advanced-inputs-for-manual-resume) in the [usage doc](./usage.md).
 
 ### Annotation with Liftoff
 

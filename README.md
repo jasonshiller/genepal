@@ -29,16 +29,16 @@
   - With protein evidence alone, [BRAKER workflow C](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
   - With protein plus RNASeq evidence, [BRAKER workflow D](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
 - [Liftoff](https://github.com/agshumate/Liftoff): Optionally, liftoff annotations from reference genome FASTA/GFF
-- [TSEBRA](https://github.com/Gaius-Augustus/TSEBRA)
-  - Ensure that each BRAKER model has [full intron support](./docs/usage.md#iso-forms-and-full-intron-support)
-  - Optionally, ensure that each Liftoff model has full intron support
+- [TSEBRA](https://github.com/Gaius-Augustus/TSEBRA): Optionally, ensure that each BRAKER or both BRAKER and Liftoff models have [full intron support](./docs/usage.md#iso-forms-and-full-intron-support)
 - [AGAT](https://github.com/NBISweden/AGAT)
   - Merge multi-reference liftoffs
   - Remove liftoff transcripts marked by _valid_ORF=False_
+  - Remove liftoff genes with any intron shorter than 10 bp
+  - Remove rRNA and tRNA from liftoff
   - Optionally, allow or remove iso-forms
   - Remove BRAKER models from Liftoff loci
-  - Optionally, remove models without any EggNOG-mapper hits
   - Merge Liftoff and BRAKER models
+  - Optionally, remove models without any EggNOG-mapper hits
 - [EggNOG-mapper](https://github.com/eggnogdb/eggnog-mapper): Add functional annotation to gff
 - [GenomeTools](https://github.com/genometools/genometools): GFF format validation
 - [GffRead](https://github.com/gpertea/gffread): Extraction of protein sequences

@@ -1,0 +1,4 @@
+tag     ,fasta                                                                                                                           ,is_masked ,benchmark
+Ostta   ,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/158/475/GCA_002158475.1_Ostta1115_2/GCA_002158475.1_Ostta1115_2_genomic.fna.gz ,yes       ,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/158/475/GCA_002158475.1_Ostta1115_2/GCA_002158475.1_Ostta1115_2_genomic.gff.gz
+RCC7079 ,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/339/685/GCA_905339685.1_AP0985_ms/GCA_905339685.1_AP0985_ms_genomic.fna.gz     ,yes
+RCC7080 ,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/339/615/GCA_905339615.1_AP0986_ms/GCA_905339615.1_AP0986_ms_genomic.fna.gz     ,yes

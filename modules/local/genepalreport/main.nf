@@ -10,8 +10,12 @@ process GENEPALREPORT {
         'community.wave.seqera.io/library/r-base_r-dplyr_r-gt_r-gtextras_pruned:0a84d5aec45783b9' }"
 
     input:
-    path(splicing_marked_gff3, stageAs: 'results/etc/splicing_marked/*')
-    path(pipeline_info, stageAs: 'results/pipeline_info/*')
+    path(splicing_marked_gff3   , stageAs: 'results/etc/splicing_marked/*')
+    path(orthofinder            , stageAs: 'results/orthofinder/*')
+    path(busco_fasta            , stageAs: 'results/busco/fasta/*')
+    path(busco_gff              , stageAs: 'results/busco/gff/*')
+    path(benchmark              , stageAs: 'results/benchmark/*')
+    path(pipeline_info          , stageAs: 'results/pipeline_info/*')
 
     output:
     path("*.html")

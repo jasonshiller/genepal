@@ -29,8 +29,10 @@ workflow FASTA_ORTHOFINDER {
         [ [], [] ]
     )
 
+    ch_orthofinder              = ORTHOFINDER.out.orthofinder
     ch_versions                 = ch_versions.mix(ORTHOFINDER.out.versions)
 
     emit:
+    orthofinder                 = ch_orthofinder        // [ val(meta), orthofinder ]
     versions                    = ch_versions           // [ versions.yml ]
 }

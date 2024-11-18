@@ -212,6 +212,7 @@ workflow GENEPAL {
         ch_orthofinder_pep
     )
 
+    ch_orthofinder              = FASTA_ORTHOFINDER.out.orthofinder
     ch_versions                 = ch_versions.mix(FASTA_ORTHOFINDER.out.versions)
 
     // SUBWORKFLOW: FASTA_GXF_BUSCO_PLOT
@@ -232,9 +233,11 @@ workflow GENEPAL {
         [] // val_busco_config
     )
 
+    ch_busco_fasta_summary      = FASTA_GXF_BUSCO_PLOT.out.assembly_short_summaries_txt
+    ch_busco_gff_summary        = FASTA_GXF_BUSCO_PLOT.out.annotation_short_summaries_txt
     ch_multiqc_files            = ch_multiqc_files
-                                | mix(FASTA_GXF_BUSCO_PLOT.out.assembly_short_summaries_txt)
-                                | mix(FASTA_GXF_BUSCO_PLOT.out.annotation_short_summaries_txt)
+                                | mix(ch_busco_fasta_summary)
+                                | mix(ch_busco_gff_summary)
     ch_versions                 = ch_versions.mix(FASTA_GXF_BUSCO_PLOT.out.versions)
 
     // SUBWORKFLOW: GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES
@@ -269,8 +272,8 @@ workflow GENEPAL {
         ch_benchmark_inputs.map { meta, gff, fasta, ref_gff -> [ meta, ref_gff ] }
     )
 
-    ch_multiqc_files            = ch_multiqc_files
-                                | mix(BENCHMARK.out.stats)
+    ch_benchmark_stats          = BENCHMARK.out.stats
+    ch_multiqc_files            = ch_multiqc_files.mix(ch_benchmark_stats)
     ch_versions                 = ch_versions.mix(BENCHMARK.out.versions.first())
 
     // Collate and save software versions
@@ -326,6 +329,10 @@ workflow GENEPAL {
 
     GENEPALREPORT (
         ch_saved_marked_gff3    .map { meta, file -> file } .collect(),
+        ch_orthofinder          .map { meta, dir -> dir }   .collect(),
+        ch_busco_fasta_summary  .map { meta, file -> file } .collect(),
+        ch_busco_gff_summary    .map { meta, file -> file } .collect(),
+        ch_benchmark_stats      .map { meta, file -> file } .collect(),
         ch_pipeline_info                                    .collect()
     )
 

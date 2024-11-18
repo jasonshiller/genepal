@@ -328,12 +328,12 @@ workflow GENEPAL {
 
 
     GENEPALREPORT (
-        ch_saved_marked_gff3    .map { meta, file -> file } .collect(),
-        ch_orthofinder          .map { meta, dir -> dir }   .collect(),
-        ch_busco_fasta_summary  .map { meta, file -> file } .collect(),
-        ch_busco_gff_summary    .map { meta, file -> file } .collect(),
-        ch_benchmark_stats      .map { meta, file -> file } .collect(),
-        ch_pipeline_info                                    .collect()
+        ch_saved_marked_gff3    .map { meta, file -> file   }   .collect()              ,
+        ch_orthofinder          .map { meta, dir -> dir     }   .collect()  .ifEmpty([]),
+        ch_busco_fasta_summary  .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_busco_gff_summary    .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_benchmark_stats      .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_pipeline_info                                        .collect()
     )
 
     emit:

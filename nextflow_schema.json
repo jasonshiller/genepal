@@ -116,7 +116,8 @@
                 "fastqc_skip": {
                     "type": "boolean",
                     "description": "Skip FASTQC or not?",
-                    "fa_icon": "fas fa-question-circle"
+                    "fa_icon": "fas fa-question-circle",
+                    "default": true
                 },
                 "fastp_skip": {
                     "type": "boolean",

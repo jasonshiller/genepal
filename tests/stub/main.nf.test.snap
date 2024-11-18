@@ -2,7 +2,7 @@
     "full - stub": {
         "content": [
             {
-                "successful tasks": 152,
+                "successful tasks": 148,
                 "versions": {
                     "AGAT_CONVERTSPGFF2GTF": {
                         "agat": "v1.4.0"
@@ -60,12 +60,6 @@
                     },
                     "FASTP": {
                         "fastp": "0.23.4"
-                    },
-                    "FASTQC_RAW": {
-                        "fastqc": "0.12.1"
-                    },
-                    "FASTQC_TRIM": {
-                        "fastqc": "0.12.1"
                     },
                     "FINAL_GFF_CHECK": {
                         "genometools": "1.6.5"
@@ -170,14 +164,6 @@
                     "cane3.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Root1.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "cane3.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "Root1.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "Root1.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "cane3.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "cane3.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "Root1_trim.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "Root1_trim.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "cane3_trim.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "cane3_trim.zip:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Log.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
@@ -187,6 +173,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-11T17:57:02.994671"
+        "timestamp": "2024-11-18T15:53:42.526012"
     }
 }

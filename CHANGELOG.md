@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.5.0dev - [18-Nov-2024]
+## v0.5.0dev - [19-Nov-2024]
 
 ### `Added`
 
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 7. Now removing liftoff genes with any intron shorted than 10bp [#89](https://github.com/Plant-Food-Research-Open/genepal/issues/89)
 8. Now also removing `rRNA` and `tRNA` after liftoff as the downstream logic in the pipeline can not correctly handle these
 9. Now skipping FastQC by default [#98](https://github.com/Plant-Food-Research-Open/genepal/issues/98)
+10. Added an HTML report [#44](https://github.com/Plant-Food-Research-Open/genepal/issues/44)
 
 ### `Fixed`
 

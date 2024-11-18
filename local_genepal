@@ -4,19 +4,41 @@ NO_FORMAT="\033[0m"
 C_RED="\033[38;5;9m"
 F_BOLD="\033[1m"
 
-[[ $1 == '-stub' ]] \
-    && stub='-stub' \
-    || stub=''
+profile="test_full"
+stub=""
+eggnogmapper_db_dir_param=""
 
-[[ $1 == '-stub' ]] \
-    && echo 'Executing with -stub' \
-    || echo -e "${C_RED}${F_BOLD}Executing without -stub${NO_FORMAT}"
+for arg in "$@"; do
+    case $arg in
+        -stub)
+            stub="-stub"
+            ;;
+        -test)
+            profile="test"
+            ;;
+        -test_full)
+            profile="test_full"
+            ;;
+    esac
+done
 
+if [[ -z $stub ]]; then
+    echo -e "${C_RED}${F_BOLD}Executing without -stub${NO_FORMAT}"
+fi
+
+if [[ $profile == "test_full" ]]; then
+    eggnogmapper_db_dir_param="--eggnogmapper_db_dir ../dbs/emapperdb/5.0.2"
+    echo "Executing test_full"
+else
+    echo "Executing test"
+fi
+
+# Run nextflow with the selected flags
 nextflow run \
     main.nf \
-    -profile docker,test_full \
+    -profile docker,${profile} \
     -resume \
     $stub \
     -c ../nxf-config/resources.config \
-    --eggnogmapper_db_dir ../dbs/emapperdb/5.0.2 \
+    $eggnogmapper_db_dir_param \
     --outdir results

@@ -45,7 +45,7 @@
 - [OrthoFinder](https://github.com/davidemms/OrthoFinder): Perform phylogenetic orthology inference across genomes
 - [GffCompare](https://github.com/gpertea/gffcompare): Compare and benchmark against an existing annotation
 - [BUSCO](https://gitlab.com/ezlab/busco): Completeness statistics for genome and annotation through proteins
-- [R Markdown](https://rmarkdown.rstudio.com): Specialized pangene report
+- [R Markdown](https://rmarkdown.rstudio.com): Specialized pangene analysis
 - [MultiQC](https://docs.seqera.io/multiqc): Exhaustive QC statistics
 
 ## Usage

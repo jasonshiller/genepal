@@ -494,7 +494,7 @@ def toolBibliographyText(versions_yml) {
             ( ! v_text.contains('star:') )          ? ''    : 'Dobin A, Davis CA, Schlesinger F, Drenkow J, Zaleski C, Jha S, Batut P, Chaisson M, Gingeras TR. STAR: ultrafast universal RNA-seq aligner. Bioinformatics. 2013 Jan 1;29(1):15-21. doi: <a href="https://doi.org/10.1093/bioinformatics/bts635">10.1093/bioinformatics/bts635</a>. Epub 2012 Oct 25. PMID: 23104886; PMCID: PMC3530905.',
             false                                   ? ''    : 'Gabriel, L., Hoff, K.J., Brůna, T. et al. TSEBRA: transcript selector for BRAKER. BMC Bioinformatics 22, 566 (2021). doi: <a href="https://doi.org/10.1186/s12859-021-04482-0">10.1186/s12859-021-04482-0</a>',
             false                                   ? ''    : 'Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: <a href="https://doi.org/10.1093/bioinformatics/btw354">10.1093/bioinformatics/btw354</a>',
-        ].collect { it -> it != '' ? "<li>$it</li>" : '' }.join(' ').trim()
+        ].findAll { it != '' }.collect { it -> "<li>$it</li>" }.join('').trim()
 
     return reference_text
 }

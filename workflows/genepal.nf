@@ -26,6 +26,7 @@ include { CAT_CAT as SAVE_MARKED_GFF3           } from '../modules/nf-core/cat/c
 include { GFFCOMPARE as BENCHMARK               } from '../modules/nf-core/gffcompare/main'
 include { FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP  } from '../subworkflows/local/file_gunzip'
 include { MULTIQC                               } from '../modules/nf-core/multiqc/main'
+include { GENEPALREPORT                         } from '../modules/local/genepalreport/main.nf'
 
 include { methodsDescriptionText                } from '../subworkflows/local/utils_nfcore_genepal_pipeline'
 include { softwareVersionsToYAML                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -211,6 +212,7 @@ workflow GENEPAL {
         ch_orthofinder_pep
     )
 
+    ch_orthofinder              = FASTA_ORTHOFINDER.out.orthofinder
     ch_versions                 = ch_versions.mix(FASTA_ORTHOFINDER.out.versions)
 
     // SUBWORKFLOW: FASTA_GXF_BUSCO_PLOT
@@ -231,9 +233,11 @@ workflow GENEPAL {
         [] // val_busco_config
     )
 
+    ch_busco_fasta_summary      = FASTA_GXF_BUSCO_PLOT.out.assembly_short_summaries_txt
+    ch_busco_gff_summary        = FASTA_GXF_BUSCO_PLOT.out.annotation_short_summaries_txt
     ch_multiqc_files            = ch_multiqc_files
-                                | mix(FASTA_GXF_BUSCO_PLOT.out.assembly_short_summaries_txt)
-                                | mix(FASTA_GXF_BUSCO_PLOT.out.annotation_short_summaries_txt)
+                                | mix(ch_busco_fasta_summary)
+                                | mix(ch_busco_gff_summary)
     ch_versions                 = ch_versions.mix(FASTA_GXF_BUSCO_PLOT.out.versions)
 
     // SUBWORKFLOW: GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES
@@ -247,6 +251,10 @@ workflow GENEPAL {
 
     // MODULE: CAT_CAT as SAVE_MARKED_GFF3
     SAVE_MARKED_GFF3 ( ch_splicing_marked_gff3 )
+
+    ch_saved_marked_gff3        = SAVE_MARKED_GFF3.out.file_out
+    ch_versions                 = ch_versions.mix(SAVE_MARKED_GFF3.out.versions.first())
+
 
     // SUBWORKFLOW: FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP
     BENCHMARK_GFF3_GUNZIP ( ch_benchmark_gff )
@@ -264,8 +272,8 @@ workflow GENEPAL {
         ch_benchmark_inputs.map { meta, gff, fasta, ref_gff -> [ meta, ref_gff ] }
     )
 
-    ch_multiqc_files            = ch_multiqc_files
-                                | mix(BENCHMARK.out.stats)
+    ch_benchmark_stats          = BENCHMARK.out.stats
+    ch_multiqc_files            = ch_multiqc_files.mix(ch_benchmark_stats)
     ch_versions                 = ch_versions.mix(BENCHMARK.out.versions.first())
 
     // Collate and save software versions
@@ -309,6 +317,23 @@ workflow GENEPAL {
         [],
         [],
         []
+    )
+
+    ch_versions                 = ch_versions.mix(MULTIQC.out.versions)
+
+    // MODULE: GENEPALREPORT
+    ch_pipeline_info            = ch_workflow_summary
+                                | mix(ch_versions_yml)
+                                | mix(ch_methods_description)
+
+
+    GENEPALREPORT (
+        ch_saved_marked_gff3    .map { meta, file -> file   }   .collect()              ,
+        ch_orthofinder          .map { meta, dir -> dir     }   .collect()  .ifEmpty([]),
+        ch_busco_fasta_summary  .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_busco_gff_summary    .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_benchmark_stats      .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_pipeline_info                                        .collect()
     )
 
     emit:

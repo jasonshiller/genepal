@@ -2,7 +2,7 @@
     "full - stub": {
         "content": [
             {
-                "successful tasks": 148,
+                "successful tasks": 149,
                 "versions": {
                     "AGAT_CONVERTSPGFF2GTF": {
                         "agat": "v1.4.0"
@@ -112,6 +112,9 @@
                     "SAMTOOLS_CAT": {
                         "samtools": 1.21
                     },
+                    "SAVE_MARKED_GFF3": {
+                        "pigz": "2.3.4"
+                    },
                     "SEQKIT_RMDUP": {
                         "seqkit": "v2.8.0"
                     },
@@ -164,6 +167,8 @@
                     "cane3.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Root1.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "cane3.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "summary_stats.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "genepal_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Log.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
@@ -173,6 +178,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-18T15:53:42.526012"
+        "timestamp": "2024-11-19T11:18:02.819662"
     }
 }

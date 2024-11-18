@@ -66,7 +66,7 @@ word-wrap: break-word;
 
 ## General Statistics
 
-```{r genes_features_annotation}
+```{r genes_features_annotation, warning=FALSE}
 gff_combined_results <-
   list.files("results/etc/splicing_marked/",
     pattern = "\\.gff3$", full.names = TRUE
@@ -122,7 +122,7 @@ genes_and_annos_table_gt
 <!-- BUSCO -->
 
 
-```{r busco_merged_final_df}
+```{r busco_merged_final_df, warning=FALSE}
 busco_merged_final_df <-
   parse_busco_folder("results/busco/fasta/", col_prefix = "Genome") %>%
   merge(
@@ -131,7 +131,7 @@ busco_merged_final_df <-
 ```
 
 
-```{r busco_results, eval=(exists("busco_merged_final_df") && nrow(busco_merged_final_df) > 0), results='asis'}
+```{r busco_results, eval=(exists("busco_merged_final_df") && nrow(busco_merged_final_df) > 0), results='asis', warning=FALSE}
 cat("## BUSCO")
 
 busco_merged_final_df %>%
@@ -153,13 +153,13 @@ report_data_json <- append(report_data_json, list(busco = busco_merged_final_df)
 <!-- OrthoFinder Statistics -->
 
 
-```{r final_orthstats}
+```{r final_orthstats, warning=FALSE}
 oof <- "results/orthofinder/genepal/Comparative_Genomics_Statistics/Statistics_PerSpecies.tsv"
 final_orthstats <- process_protein_clustering(oof)
 ```
 
 
-```{r orthofinder_results, eval=(exists("final_orthstats") && !is.null(final_orthstats)), results='asis'}
+```{r orthofinder_results, eval=(exists("final_orthstats") && !is.null(final_orthstats)), results='asis', warning=FALSE}
 cat("## OrthoFinder")
 
 final_orthstats %>%
@@ -176,20 +176,20 @@ final_orthstats %>%
 <!-- OrthoFinder Hierarchical Orthogroups -->
 
 
-```{r n0_df}
+```{r n0_df, warning=FALSE}
 n0o <- "results/orthofinder/genepal/Phylogenetic_Hierarchical_Orthogroups/N0.tsv"
 n0_df <- process_hog_counts(n0o)
 ```
 
 
-```{r pangenome_matrix_heading, eval=(exists("n0_df") && !is.null(n0_df$heatmap)), results='asis'}
+```{r pangenome_matrix_heading, eval=(exists("n0_df") && !is.null(n0_df$heatmap)), results='asis', warning=FALSE}
 cat("### Pangenome Matrix")
 cat("<br>")
 cat("<br>")
 ```
 
 
-```{r pheatmap, eval=(exists("n0_df") && !is.null(n0_df$heatmap)), results='hide', fig.align='center', fig.cap="Heatmap showing number of proteins present in each orthocluster (clusters where all individuals have 1 copy are excluded). Columns = Orthologue cluster, Row = Individual", fig.width=7, fig.height=7, dpi=150}
+```{r pheatmap, eval=(exists("n0_df") && !is.null(n0_df$heatmap)), results='hide', fig.align='center', fig.cap="Heatmap showing number of proteins present in each orthocluster (clusters where all individuals have 1 copy are excluded). Columns = Orthologue cluster, Row = Individual", fig.width=7, fig.height=7, dpi=150, warning=FALSE}
 pheatmap(n0_df$heatmap,
   show_colnames = FALSE,
   main = "Orthologue clusters containing accessory proteins",
@@ -212,12 +212,12 @@ pheatmap(n0_df$heatmap,
 <!-- Benchmarking Statistics -->
 
 
-```{r benchmarking_statistics}
+```{r benchmarking_statistics, warning=FALSE}
 benchmarking_statistics <- parse_gff_compare_folder("results/benchmark/")
 ```
 
 
-```{r eval=(exists("benchmarking_statistics") && !is.null(benchmarking_statistics)), results='asis'}
+```{r eval=(exists("benchmarking_statistics") && !is.null(benchmarking_statistics)), results='asis', warning=FALSE}
 cat("## Benchmarking Statistics")
 
 benchmarking_statistics$sensitivity_precision %>%
@@ -254,12 +254,12 @@ benchmarking_statistics$missing_novel %>%
 report_data_json <- append(report_data_json, list(benchmark = benchmarking_statistics))
 ```
 
-```{r store_json}
+```{r store_json, warning=FALSE}
 toJSON(report_data_json, pretty = TRUE) %>%
   write(file.path(outputs_folder, "summary_stats.json"))
 ```
 
-```{r print_parameters, eval=(file.exists("results/pipeline_info/workflow_summary_mqc.yaml")), results='asis'}
+```{r print_parameters, eval=(file.exists("results/pipeline_info/workflow_summary_mqc.yaml")), results='asis', warning=FALSE}
 cat("<h2> Workflow Summary </h2>")
 
 cat('<div class="wf_summary_container">')
@@ -267,7 +267,7 @@ cat(read_yaml("results/pipeline_info/workflow_summary_mqc.yaml")$data)
 cat("</div>")
 ```
 
-```{r print_versions, eval=(file.exists("results/pipeline_info/genepal_software_mqc_versions.yml")), results='asis'}
+```{r print_versions, eval=(file.exists("results/pipeline_info/genepal_software_mqc_versions.yml")), results='asis', warning=FALSE}
 cat("<h2> Software Versions </h2>")
 
 versions_df <-
@@ -296,7 +296,7 @@ versions_df %>%
   )
 ```
 
-```{r print_wf_description, eval=(file.exists("results/pipeline_info/methods_description_mqc.yaml")), results='asis'}
+```{r print_wf_description, eval=(file.exists("results/pipeline_info/methods_description_mqc.yaml")), results='asis', warning=FALSE}
 cat("<h2> Methods Description </h2>")
 
 cat('<div class="wf_summary_container">')

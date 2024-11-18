@@ -21,7 +21,8 @@ nextflow_pipeline {
                 false,
                 [
                     'pipeline_info/*.{html,json,txt,yml}',
-                    'multiqc_report.html'
+                    'multiqc_report.html',
+                    'genepal_report.html'
                 ],
                 null,
                 ['**']

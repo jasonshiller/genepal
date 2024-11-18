@@ -2,7 +2,7 @@
     "profile - test": {
         "content": [
             {
-                "successful tasks": 17,
+                "successful tasks": 18,
                 "versions": {
                     "AGAT_CONVERTSPGFF2GTF": {
                         "agat": "v1.4.0"
@@ -40,6 +40,9 @@
                     "GT_GFF3": {
                         "genometools": "1.6.5"
                     },
+                    "SAVE_MARKED_GFF3": {
+                        "pigz": "2.3.4"
+                    },
                     "SEQKIT_RMDUP": {
                         "seqkit": "v2.8.0"
                     },
@@ -58,7 +61,8 @@
                 "stable paths": [
                     "a_thaliana.gt.gff3:md5,8ab16549095f605ff8715ac4a3de58ed",
                     "a_thaliana.pep.fasta:md5,4994c0393ca0245a1c57966d846d101e",
-                    "a_thaliana.gff3:md5,d23d16cd86499d48a30ffb981ed27891"
+                    "a_thaliana.gff3:md5,d23d16cd86499d48a30ffb981ed27891",
+                    "summary_stats.json:md5,007ba5cf2b7a2fd395a27d9458ca2d2e"
                 ],
                 "stable names": [
                     "annotations",
@@ -68,6 +72,9 @@
                     "etc",
                     "etc/splicing_marked",
                     "etc/splicing_marked/a_thaliana.gff3",
+                    "genepal_data",
+                    "genepal_data/summary_stats.json",
+                    "genepal_report.html",
                     "multiqc_report.html",
                     "pipeline_info"
                 ]
@@ -77,6 +84,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-10-22T14:11:32.773091"
+        "timestamp": "2024-11-19T11:35:02.477202"
     }
 }

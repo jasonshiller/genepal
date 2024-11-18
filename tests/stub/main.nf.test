@@ -20,7 +20,7 @@ nextflow_pipeline {
         }
 
         then {
-            def stable_path = getAllFilesFromDir(params.outdir, false, ['pipeline_info/*.{html,json,txt,yml}', 'report.{html,json}'], null, ['**'])
+            def stable_path = getAllFilesFromDir(params.outdir, false, ['pipeline_info/*.{html,json,txt,yml}'], null, ['**'])
 
             assertAll(
                 { assert workflow.success },

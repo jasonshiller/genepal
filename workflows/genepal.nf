@@ -26,6 +26,7 @@ include { CAT_CAT as SAVE_MARKED_GFF3           } from '../modules/nf-core/cat/c
 include { GFFCOMPARE as BENCHMARK               } from '../modules/nf-core/gffcompare/main'
 include { FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP  } from '../subworkflows/local/file_gunzip'
 include { MULTIQC                               } from '../modules/nf-core/multiqc/main'
+include { GENEPALREPORT                         } from '../modules/local/genepalreport/main.nf'
 
 include { methodsDescriptionText                } from '../subworkflows/local/utils_nfcore_genepal_pipeline'
 include { softwareVersionsToYAML                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -248,6 +249,10 @@ workflow GENEPAL {
     // MODULE: CAT_CAT as SAVE_MARKED_GFF3
     SAVE_MARKED_GFF3 ( ch_splicing_marked_gff3 )
 
+    ch_saved_marked_gff3        = SAVE_MARKED_GFF3.out.file_out
+    ch_versions                 = ch_versions.mix(SAVE_MARKED_GFF3.out.versions.first())
+
+
     // SUBWORKFLOW: FILE_GUNZIP as BENCHMARK_GFF3_GUNZIP
     BENCHMARK_GFF3_GUNZIP ( ch_benchmark_gff )
     ch_benchmark_gunzip_gff     = BENCHMARK_GFF3_GUNZIP.out.gunzip
@@ -309,6 +314,19 @@ workflow GENEPAL {
         [],
         [],
         []
+    )
+
+    ch_versions                 = ch_versions.mix(MULTIQC.out.versions)
+
+    // MODULE: GENEPALREPORT
+    ch_pipeline_info            = ch_workflow_summary
+                                | mix(ch_versions_yml)
+                                | mix(ch_methods_description)
+
+
+    GENEPALREPORT (
+        ch_saved_marked_gff3    .map { meta, file -> file } .collect(),
+        ch_pipeline_info                                    .collect()
     )
 
     emit:

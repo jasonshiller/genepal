@@ -39,19 +39,19 @@ report_data_json <- list()
 
 ```{css}
 .main-container {
-max-width: 95% !important; 
+max-width: 95% !important;
 margin: auto;
 }
 
 table.gt_table {
-margin-left: 0 !important; 
-width: 100% !important;    
+margin-left: 0 !important;
+width: 100% !important;
 }
 
 body {
-padding-left: 0 !important;  
-margin-left: 0 !important;  
-width: 100% !important;     
+padding-left: 0 !important;
+margin-left: 0 !important;
+width: 100% !important;
 }
 
 .caption {

@@ -11,6 +11,7 @@ The directories listed below will be created in the results directory after the 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
 <!-- no toc -->
+
 - [Repeat annotation](#repeat-annotation)
 - [Repeat masking](#repeat-masking)
 - [RNASeq trimming, filtering and QC](#rnaseq-trimming-filtering-and-qc)

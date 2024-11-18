@@ -58,3 +58,7 @@ indent_size = unset
 # ignore LICENSE
 [LICENSE]
 indent_size = unset
+
+# ignore bin/genepal_report
+[bin/genepal_report*]
+indent_size = unset

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 8. Now also removing `rRNA` and `tRNA` after liftoff as the downstream logic in the pipeline can not correctly handle these
 9. Now skipping FastQC by default [#98](https://github.com/Plant-Food-Research-Open/genepal/issues/98)
 10. Added an HTML report [#44](https://github.com/Plant-Food-Research-Open/genepal/issues/44)
+11. Added content type as text/html for the MultiQC and genepal reports
 
 ### `Fixed`
 

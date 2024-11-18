@@ -38,6 +38,7 @@ if [ $full_test_flag -eq 1 ]; then
         -c pfr/profile.config \
         -profile pfr,apptainer,test_full \
         -resume \
+	--eggnogmapper_db_dir "/workspace/ComparativeDataSources/emapperdb/5.0.2" \
         --outdir results
 else
     nextflow \

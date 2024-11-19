@@ -21,6 +21,7 @@
 - [fasta_validator](https://github.com/linsalrob/fasta_validator): Validate genome FASTA
 - [RepeatModeler](https://github.com/Dfam-consortium/RepeatModeler) or [EDTA](https://github.com/oushujun/EDTA): Create TE library
 - [RepeatMasker](https://github.com/rmhubley/RepeatMasker): Soft mask the genome fasta
+- [sra-tools](https://github.com/ncbi/sra-tools): RNASeq data download from SRA
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc), [fastp](https://github.com/OpenGene/fastp), [SortMeRNA](https://github.com/sortmerna/sortmerna): QC, trim and filter RNASeq evidence
 - [STAR](https://github.com/alexdobin/STAR): RNASeq alignment
   - Directly provided BAM files should be `--outSAMstrandField intronMotif` compliant

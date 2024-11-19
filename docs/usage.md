@@ -69,7 +69,7 @@ With these two parameters, the pipeline has sufficient inputs to execute the [BR
 RNASeq evidence must be provided through a samplesheet in CSV format which has the following columns,
 
 - `sample:` A sample identifier. The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis.
-- `file_1:` A FASTQ or BAM file
+- `file_1:` A SRA ID for paired-end reads or FASTQ or BAM file
 - `file_2:` A FASTQ file if `file_1` is also a FASTQ file and provides paired samples.
 - `target_assemblies:` A semicolon `;` separated list of assembly tags from the [assemblysheet input](#assemblysheet-input). If `file_1` points to a BAM file, only a single assembly can be listed under `target_assemblies` for that sample. FASTQ data from `file_1` and `file_2` is aligned against each target assembly. BAM data from `file_1` is considered already aligned against the target assembly and is directly fed to BRAKER.
 

@@ -157,22 +157,35 @@ workflow PIPELINE_INITIALISATION {
                                 ? Channel.empty()
                                 : Channel.fromList (samplesheetToList(rna_evidence, "assets/schema_rna.json"))
                                 | map { meta, f1, f2 ->
-                                    f2
-                                    ? [ meta + [ single_end: false ], [ file(f1, checkIfExists:true), file(f2, checkIfExists:true) ] ]
-                                    : [ meta + [ single_end: true ], [ file(f1, checkIfExists:true) ] ]
+                                    "$f1".find(/^SRR[0-9]*$/)
+                                    ? [ meta + [ single_end: false ], [ f1, f2 ] ]
+                                    : f2
+                                    ? [ meta + [ single_end: false ], [ f1, f2 ] ]
+                                    : [ meta + [ single_end: true ], [ f1 ] ]
                                 }
-                                | map { meta, files ->
-                                    [ meta + [ target_assemblies: meta.target_assemblies.split(';').sort() ], files ]
+                                | map { meta, data ->
+                                    [ meta + [ target_assemblies: meta.target_assemblies.split(';').sort() ], data ]
                                 }
-                                | branch { meta, files ->
-                                    fq:  files.first().extension != 'bam'
-                                    bam: files.first().extension == 'bam'
+                                | branch { meta, data ->
+                                    sra: "${data.first()}".find(/^SRR[0-9]*$/)
+                                    fq:  "${data.first()}".find(/^\S+\.(f(ast)?q\.gz)$/)
+                                    bam: "${data.first()}".find(/^\S+\.bam$/)
+                                }
+
+    ch_rna_sra                  = ! params.rna_evidence
+                                ? Channel.empty()
+                                : ch_rna_branch.sra
+                                | map { meta, sra -> [ meta.id, meta, sra ] }
+                                | groupTuple
+                                | combine(ch_tar_assm_str)
+                                | map { id, metas, sra, tar_assm_str ->
+                                    validateSRAMetadata(metas, sra, tar_assm_str)
                                 }
 
     ch_rna_fq                   = ! params.rna_evidence
                                 ? Channel.empty()
                                 : ch_rna_branch.fq
-                                | map { meta, files -> [ meta.id, meta, files ] }
+                                | map { meta, files -> [ meta.id, meta, files.collect { file(it) } ] }
                                 | groupTuple
                                 | combine(ch_tar_assm_str)
                                 | map { id, metas, files, tar_assm_str ->
@@ -182,7 +195,7 @@ workflow PIPELINE_INITIALISATION {
     ch_rna_bam                  = ! params.rna_evidence
                                 ? Channel.empty()
                                 : ch_rna_branch.bam
-                                | map { meta, files -> [ meta.id, meta, files ] }
+                                | map { meta, files -> [ meta.id, meta, files.collect { file(it) } ] }
                                 | groupTuple
                                 | combine(ch_tar_assm_str)
                                 | flatMap { id, metas, files, tar_assm_str ->
@@ -290,8 +303,8 @@ workflow PIPELINE_INITIALISATION {
     braker_annotation           = ch_braker_annotation
     braker_ex_asm_str           = ch_braker_ex_asm_str
     benchmark_gff               = ch_benchmark_gff
+    rna_sra                     = ch_rna_sra
     rna_fq                      = ch_rna_fq
-    rna_bam                     = ch_rna_bam
     rna_bam_by_assembly         = ch_rna_bam_by_assembly
     sortmerna_fastas            = ch_sortmerna_fastas
     ext_prot_fastas             = ch_ext_prot_fastas
@@ -373,6 +386,29 @@ def idFromFileName(fileName) {
     if ( trial == fileName ) { return fileName }
 
     return idFromFileName ( trial )
+}
+
+def validateSRAMetadata(metas, sra, permAssString) {
+    def permAssList = permAssString.split(",")
+
+    // Check if a single sample is accociated with each SRA ID
+    if ( metas.size() > 1 ) {
+        error "Samples with SRA IDs should be unique. ${metas.first().id} is repeated"
+    }
+
+    def meta = metas.first()
+
+    // Check if sra list has only one element
+    if ( sra.first()[1] != [] ) {
+        error "Sample '${meta.id}' lists a SRA ID under file1. It's file2 column should be empty"
+    }
+
+    // Check if each listed assembly is permissible
+    if ( meta.target_assemblies.any { !permAssList.contains( it ) } ) {
+        error "Sample ${meta.id} targets ${meta.target_assemblies} which are not in $permAssList"
+    }
+
+    [ metas.first(), sra.first().first() ]
 }
 
 def validateFastqMetadata(metas, fqs, permAssString) {

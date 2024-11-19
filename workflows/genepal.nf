@@ -20,7 +20,8 @@ include { GFF_STORE                             } from '../subworkflows/local/gf
 include { FASTA_ORTHOFINDER                     } from '../subworkflows/local/fasta_orthofinder'
 include { FASTA_GXF_BUSCO_PLOT                  } from '../subworkflows/gallvp/fasta_gxf_busco_plot/main'
 
-include { GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES } from '../subworkflows/gallvp/gxf_fasta_agat_spaddintrons_spextractsequences/main'
+include { GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES                            } from '../subworkflows/gallvp/gxf_fasta_agat_spaddintrons_spextractsequences/main'
+include { FASTQ_DOWNLOAD_PREFETCH_FASTERQDUMP_SRATOOLS as DOWNLOAD_RNASEQ_FROM_SRA  } from '../subworkflows/nf-core/fastq_download_prefetch_fasterqdump_sratools/main'
 
 include { CAT_CAT as SAVE_MARKED_GFF3           } from '../modules/nf-core/cat/cat/main'
 include { GFFCOMPARE as BENCHMARK               } from '../modules/nf-core/gffcompare/main'
@@ -48,8 +49,8 @@ workflow GENEPAL {
     ch_braker_annotation
     ch_braker_ex_asm_str
     ch_benchmark_gff
+    ch_rna_sra
     ch_rna_fq
-    ch_rna_bam
     ch_rna_bam_by_assembly
     ch_sortmerna_fastas
     ch_ext_prot_fastas
@@ -79,9 +80,19 @@ workflow GENEPAL {
     ch_target_assemby_index     = PREPARE_ASSEMBLY.out.target_assemby_index
     ch_versions                 = ch_versions.mix(PREPARE_ASSEMBLY.out.versions)
 
+    // SUBWORKFLOW: DOWNLOAD_RNASEQ_FROM_SRA
+    DOWNLOAD_RNASEQ_FROM_SRA (ch_rna_sra, [] )
+
+    ch_rna_all_fq               = ch_rna_fq
+                                | mix(
+                                    DOWNLOAD_RNASEQ_FROM_SRA.out.reads
+                                    | map { meta, fq -> [ meta, [ fq ] ] }
+                                )
+    ch_versions                 = ch_versions.mix(DOWNLOAD_RNASEQ_FROM_SRA.out.versions)
+
     // SUBWORKFLOW: PREPROCESS_RNASEQ
     PREPROCESS_RNASEQ(
-        ch_rna_fq,
+        ch_rna_all_fq,
         ch_tar_assm_str,
         ch_braker_ex_asm_str,
         params.fastqc_skip,

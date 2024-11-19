@@ -2,7 +2,7 @@
     "full - stub": {
         "content": [
             {
-                "successful tasks": 149,
+                "successful tasks": 154,
                 "versions": {
                     "AGAT_CONVERTSPGFF2GTF": {
                         "agat": "v1.4.0"
@@ -48,6 +48,9 @@
                     },
                     "COMPARE_BRAKER_TO_LIFTOFF": {
                         "gffcompare": "0.12.6"
+                    },
+                    "CUSTOM_SRATOOLSNCBISETTINGS": {
+                        "sratools": "3.0.8"
                     },
                     "EGGNOGMAPPER": {
                         "eggnog-mapper": "2.1.12"
@@ -118,6 +121,14 @@
                     "SEQKIT_RMDUP": {
                         "seqkit": "v2.8.0"
                     },
+                    "SRATOOLS_FASTERQDUMP": {
+                        "sratools": "3.0.8",
+                        "pigz": 2.6
+                    },
+                    "SRATOOLS_PREFETCH": {
+                        "sratools": "3.1.0",
+                        "curl": "8.5.0"
+                    },
                     "STAR_ALIGN": {
                         "star": "2.7.10a",
                         "samtools": 1.18,
@@ -162,10 +173,13 @@
                     "red5_v3.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "red7_v5.gff3:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Root1.fastp.html:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "SRR7121148.fastp.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "cane3.fastp.html:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Root1.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "SRR7121148.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "cane3.fastp.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "Root1.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "SRR7121148.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "cane3.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "summary_stats.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "genepal_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -178,6 +192,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-19T11:18:02.819662"
+        "timestamp": "2024-11-19T17:15:13.923869"
     }
 }

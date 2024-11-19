@@ -36,8 +36,8 @@ workflow PLANTFOODRESEARCHOPEN_GENEPAL {
     ch_braker_annotation
     ch_braker_ex_asm_str
     ch_benchmark_gff
+    ch_rna_sra
     ch_rna_fq
-    ch_rna_bam
     ch_rna_bam_by_assembly
     ch_sortmerna_fastas
     ch_ext_prot_fastas
@@ -58,8 +58,8 @@ workflow PLANTFOODRESEARCHOPEN_GENEPAL {
         ch_braker_annotation,
         ch_braker_ex_asm_str,
         ch_benchmark_gff,
+        ch_rna_sra,
         ch_rna_fq,
-        ch_rna_bam,
         ch_rna_bam_by_assembly,
         ch_sortmerna_fastas,
         ch_ext_prot_fastas,
@@ -105,8 +105,8 @@ workflow {
         PIPELINE_INITIALISATION.out.braker_annotation,
         PIPELINE_INITIALISATION.out.braker_ex_asm_str,
         PIPELINE_INITIALISATION.out.benchmark_gff,
+        PIPELINE_INITIALISATION.out.rna_sra,
         PIPELINE_INITIALISATION.out.rna_fq,
-        PIPELINE_INITIALISATION.out.rna_bam,
         PIPELINE_INITIALISATION.out.rna_bam_by_assembly,
         PIPELINE_INITIALISATION.out.sortmerna_fastas,
         PIPELINE_INITIALISATION.out.ext_prot_fastas,

@@ -188,7 +188,7 @@ The final annotation files are saved in GFF3 format validated with [GENOMETOOLS]
 
 </details>
 
-The completeness of the annotations is checked with [BUSCO](https://gitlab.com/ezlab/busco). TO provide a comparative baseline, the completeness of the genomes is also checked. Moreover, the canonical/non-canonical splicing of the introns is also assessed by the pipeline.
+The completeness of the annotations is checked with [BUSCO](https://gitlab.com/ezlab/busco). To provide a comparative baseline, the completeness of the genomes is also checked. Moreover, the canonical/non-canonical splicing of the introns is also assessed by the pipeline.
 
 ### Reports
 

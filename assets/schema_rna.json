@@ -14,8 +14,8 @@
             },
             "file_1": {
                 "type": "string",
-                "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
-                "errorMessage": "FASTQ file for reads 1 or BAM file containing mapped reads must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
+                "pattern": "^SRR\\w+$|^\\S+\\.(f(ast)?q\\.gz|bam)$",
+                "errorMessage": "SRA ID that begins with SRR or FASTQ file for reads 1 or BAM file containing mapped reads must be provided. Files cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
             },
             "file_2": {
                 "errorMessage": "FASTQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",

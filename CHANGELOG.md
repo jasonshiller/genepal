@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 9. Now skipping FastQC by default [#98](https://github.com/Plant-Food-Research-Open/genepal/issues/98)
 10. Added an HTML report [#44](https://github.com/Plant-Food-Research-Open/genepal/issues/44)
 11. Added content type as text/html for the MultiQC and genepal reports
+12. Added sra-tools for RNASeq data download [#102](https://github.com/Plant-Food-Research-Open/genepal/issues/102)
 
 ### `Fixed`
 

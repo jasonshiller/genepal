@@ -1,0 +1,10 @@
+{
+    "input": "tests/stub/assemblysheet.csv",
+    "protein_evidence": "tests/stub/external-protein-fastas.txt",
+    "eggnogmapper_db_dir": "tests/stub/emapperdb/5.0.2",
+    "eggnogmapper_tax_scope": 33090,
+    "rna_evidence": "tests/stub/rnasheet.csv",
+    "liftoff_annotations": "tests/stub/liftoffannotations.csv",
+    "orthofinder_annotations": "tests/stub/orthofinderannotations.csv",
+    "outdir": "results"
+}

@@ -166,4 +166,3 @@ workflow FASTA_GXF_BUSCO_PLOT {
     annotation_png                              = ch_annotation_png                     // channel: [ png ]
     versions                                    = ch_versions                           // channel: [ versions.yml ]
 }
-

@@ -246,9 +246,18 @@ workflow GENEPAL {
 
     ch_busco_fasta_summary      = FASTA_GXF_BUSCO_PLOT.out.assembly_short_summaries_txt
     ch_busco_gff_summary        = FASTA_GXF_BUSCO_PLOT.out.annotation_short_summaries_txt
+
+    ch_busco_fasta_plot_summary = FASTA_GXF_BUSCO_PLOT.out.assembly_plot_summary_txt
+    ch_busco_gff_plot_summary   = FASTA_GXF_BUSCO_PLOT.out.annotation_plot_summary_txt
+
     ch_multiqc_files            = ch_multiqc_files
-                                | mix(ch_busco_fasta_summary)
-                                | mix(ch_busco_gff_summary)
+                                | mix(
+                                    ch_busco_fasta_plot_summary.map { file -> [ [], file ] }
+                                )
+                                | mix(
+                                    ch_busco_gff_plot_summary.map { file -> [ [], file ] }
+                                )
+
     ch_versions                 = ch_versions.mix(FASTA_GXF_BUSCO_PLOT.out.versions)
 
     // SUBWORKFLOW: GXF_FASTA_AGAT_SPADDINTRONS_SPEXTRACTSEQUENCES

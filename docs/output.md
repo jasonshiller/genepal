@@ -150,7 +150,11 @@ Functional annotation of the gene models from BRAKER and Liftoff is performed wi
 <summary>Output files</summary>
 
 - `orthofinder/`
-  - `genepal/*`
+  - `Comparative_Genomics_Statistics/`
+  - `Gene_Duplication_Events/`
+  - `Orthogroups/`
+  - `Phylogenetic_Hierarchical_Orthogroups/`
+  - `Species_Tree/`
 
 </details>
 

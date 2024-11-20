@@ -183,8 +183,7 @@
                     "cane3.fastp.log:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "summary_stats.json:md5,d41d8cd98f00b204e9800998ecf8427e",
                     "genepal_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e",
-                    "Log.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    "multiqc_report.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
             }
         ],
@@ -192,6 +191,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-19T17:15:13.923869"
+        "timestamp": "2024-11-21T12:34:14.056074"
     }
 }

@@ -11,7 +11,8 @@ process GENEPALREPORT {
 
     input:
     path(splicing_marked_gff3   , stageAs: 'results/etc/splicing_marked/*')
-    path(orthofinder            , stageAs: 'results/orthofinder/*')
+    path(orthofinder_statistics , stageAs: 'results/orthofinder/genepal/*')
+    path(orthofinder_hogs       , stageAs: 'results/orthofinder/genepal/*')
     path(busco_fasta            , stageAs: 'results/busco/fasta/*')
     path(busco_gff              , stageAs: 'results/busco/gff/*')
     path(benchmark              , stageAs: 'results/benchmark/*')

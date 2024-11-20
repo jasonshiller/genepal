@@ -78,6 +78,16 @@ parse_busco_file <- function(file_path) {
   return(results)
 }
 
+# Assumed file name pattern: short_summary.specific.(sample|lineage).(sample|lineage).*
+parse_busco_id_lineage <- function(file_name) {
+  name_components <- strsplit(basename(file_name), "\\.")[[1]][3:4]
+  id <- name_components[!grepl("_odb", name_components)]
+  lineage <- name_components[grepl("_odb", name_components)]
+  lineage_strip <- str_replace(lineage, "_odb.*$", "")
+
+  return(list(id = id, lineage = lineage_strip))
+}
+
 parse_busco_folder <- function(folder_path, col_prefix = "Genome") {
   list_of_files <- list.files(folder_path, pattern = "short_summary.specific.*.txt$", full.names = TRUE)
 
@@ -89,8 +99,8 @@ parse_busco_folder <- function(folder_path, col_prefix = "Genome") {
     lapply(parse_busco_file) %>%
     bind_rows() %>%
     mutate(
-      ID = sapply(strsplit(basename(list_of_files), "\\."), `[`, 3),
-      Lineage = sapply(strsplit(basename(list_of_files), "\\."), `[`, 4)
+      ID = list_of_files %>% lapply(parse_busco_id_lineage) %>% sapply(function(x) x$id),
+      Lineage = list_of_files %>% lapply(parse_busco_id_lineage) %>% sapply(function(x) x$lineage)
     ) %>%
     select(
       ID,
@@ -177,17 +187,13 @@ process_protein_clustering <- function(file_path) {
   if (!file.exists(file_path)) {
     return(NULL) # No output if the file doesn't exist
   }
-  df <- read.table(
-    file = file_path,
-    sep = "\t",
-    header = TRUE,
-    nrows = 10,
-    row.names = 1
-  )
+  df <- read.table(file = file_path, sep = "\t", header = TRUE, nrows = 10, row.names = 1)
   df <- df %>%
     rownames_to_column(var = "row_id") %>% # Changed to snake_case
     pivot_longer(cols = -row_id, names_to = "ID", values_to = "Value") %>%
-    pivot_wider(names_from = row_id, values_from = "Value")
+    pivot_wider(names_from = row_id, values_from = "Value") %>%
+    mutate(ID = str_replace(ID, ".pep", ""))
+
   colnames(df) <- gsub(
     x = colnames(df),
     pattern = "genes",

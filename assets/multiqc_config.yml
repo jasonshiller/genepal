@@ -28,17 +28,16 @@ module_order:
   - busco:
       name: "BUSCO"
       info: "Genome completeness statistics"
-      path_filters:
-        - "*seqkit.rmdup.fasta.txt"
+      path_filters_exclude:
+        - "*.proteins.txt"
   - busco:
       name: "BUSCO Annotation"
       info: "Annotation completeness statistics"
-      path_filters_exclude:
-        - "*seqkit.rmdup.fasta.txt"
+      path_filters:
+        - "*.proteins.txt"
   - gffcompare:
 
 extra_fn_clean_exts:
-  - ".seqkit"
-  - ".rmdup"
+  - ".proteins"
   - type: regex
     pattern: "^short_summary\\.specific\\..*_odb10\\."

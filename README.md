@@ -146,8 +146,13 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 ## Citations
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use plant-food-research-open/genepal for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+If you use plant-food-research-open/genepal for your analysis, please cite it as:
+
+> **genepal: A Nextflow pipeline for genome and pan-genome annotation.**
+>
+> Usman Rashid, Jason Shiller, Ross Crowhurst, Chen Wu, Ting-Hsuan Chen, Leonardo Salgado, Charles David, Sarah Bailey, Ignacio Carvajal, Anand Rampadarath, Ken Smith, Liam Le Lievre, Cecilia Deng, Susan Thomson
+>
+> _zenodo_. 2024. doi: [10.5281/zenodo.14195006](https://doi.org/10.5281/zenodo.14195006).
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 

@@ -12,7 +12,7 @@
 
 ## Introduction
 
-**plant-food-research-open/genepal** is a bioinformatics pipeline for single genome, phased genomes and pan-genome annotation. An overview is shown in the [Pipeline Flowchart](#pipeline-flowchart) and the references for the tools are listed in [CITATIONS.md](./CITATIONS.md).
+**plant-food-research-open/genepal** is a bioinformatics pipeline for single genome, phased genomes and pan-genome annotation. An overview is shown in the [Pipeline Flowchart](#pipeline-flowchart) and the references for the tools are listed in [CITATIONS.md](./CITATIONS.md). Protein coding gene structures are predicted with [BRAKER](https://github.com/Gaius-Augustus/BRAKER) which uses GeneMark-ES/ET/EP+/ETP. These tools require a [license](https://genemark.bme.gatech.edu/license_download.cgi) for commercial works.
 
 ## Pipeline Flowchart
 
@@ -24,9 +24,9 @@
 - [sra-tools](https://github.com/ncbi/sra-tools): RNASeq data download from SRA
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc), [fastp](https://github.com/OpenGene/fastp), [SortMeRNA](https://github.com/sortmerna/sortmerna): QC, trim and filter RNASeq evidence
 - [STAR](https://github.com/alexdobin/STAR): RNASeq alignment
-  - Directly provided BAM files should be `--outSAMstrandField intronMotif` compliant
 - [cat](https://github.com/coreutils/coreutils/blob/master/src/cat.c): Concatenate protein FASTA files
-- [BRAKER](https://github.com/Gaius-Augustus/BRAKER): Annotate the genome FASTA
+- [BRAKER](https://github.com/Gaius-Augustus/BRAKER): Predict protein coding gene structures with GeneMark-ES/ET/EP/ETP and AUGUSTUS
+  - Directly provided BAM files should be `--outSAMstrandField intronMotif` compliant
   - With protein evidence alone, [BRAKER workflow C](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
   - With protein plus RNASeq evidence, [BRAKER workflow D](https://github.com/Gaius-Augustus/BRAKER/tree/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471?tab=readme-ov-file#overview-of-modes-for-running-braker) is executed
 - [Liftoff](https://github.com/agshumate/Liftoff): Optionally, liftoff annotations from reference genome FASTA/GFF

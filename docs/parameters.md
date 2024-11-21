@@ -14,6 +14,7 @@ A Nextflow pipeline for consensus, phased and pan-genome annotation.
 | `liftoff_annotations`     | Reference annotations listed in a CSV sheet                                                              | `string`  |         |          |        |
 | `orthofinder_annotations` | Additional annotations for orthology listed in a CSV sheet                                               | `string`  |         |          |        |
 | `outdir`                  | The output directory where the results will be saved                                                     | `string`  |         | True     |        |
+| `email`                   | Email address for completion summary.                                                                    | `string`  |         |          | True   |
 
 ## Repeat annotation options
 
@@ -98,7 +99,6 @@ Less common options for the pipeline, typically set in a config file.
 | ------------------------ | ----------------------------------------------------------------- | --------- | ------- | -------- | ------ |
 | `version`                | Display version and exit.                                         | `boolean` |         |          | True   |
 | `publish_dir_mode`       | Method used to save pipeline results to output directory.         | `string`  | copy    |          | True   |
-| `email`                  | Email address for completion summary.                             | `string`  |         |          | True   |
 | `email_on_fail`          | Email address for completion summary, only when pipeline fails.   | `string`  |         |          | True   |
 | `plaintext_email`        | Send plain-text email instead of HTML.                            | `boolean` |         |          | True   |
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string`  | 25.MB   |          | True   |

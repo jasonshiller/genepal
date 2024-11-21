@@ -29,8 +29,12 @@ workflow FASTA_ORTHOFINDER {
         [ [], [] ]
     )
 
+    ch_orthofinder_statistics   = ORTHOFINDER.out.statistics
+    ch_orthofinder_hogs         = ORTHOFINDER.out.hogs
     ch_versions                 = ch_versions.mix(ORTHOFINDER.out.versions)
 
     emit:
-    versions                    = ch_versions           // [ versions.yml ]
+    orthofinder_statistics      = ch_orthofinder_statistics // [ val(meta), Comparative_Genomics_Statistics ]
+    orthofinder_hogs            = ch_orthofinder_hogs       // [ val(meta), Phylogenetic_Hierarchical_Orthogroups ]
+    versions                    = ch_versions               // [ versions.yml ]
 }

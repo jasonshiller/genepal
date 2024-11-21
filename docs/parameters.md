@@ -1,6 +1,6 @@
 # plant-food-research-open/genepal pipeline parameters
 
-A Nextflow pipeline for single genome, multiple genomes and pan-genome annotation
+A Nextflow pipeline for consensus, phased and pan-genome annotation.
 
 ## Input/output options
 
@@ -14,6 +14,7 @@ A Nextflow pipeline for single genome, multiple genomes and pan-genome annotatio
 | `liftoff_annotations`     | Reference annotations listed in a CSV sheet                                                              | `string`  |         |          |        |
 | `orthofinder_annotations` | Additional annotations for orthology listed in a CSV sheet                                               | `string`  |         |          |        |
 | `outdir`                  | The output directory where the results will be saved                                                     | `string`  |         | True     |        |
+| `email`                   | Email address for completion summary.                                                                    | `string`  |         |          | True   |
 
 ## Repeat annotation options
 
@@ -28,10 +29,10 @@ A Nextflow pipeline for single genome, multiple genomes and pan-genome annotatio
 
 | Parameter                | Description                                                        | Type      | Default                                   | Required | Hidden |
 | ------------------------ | ------------------------------------------------------------------ | --------- | ----------------------------------------- | -------- | ------ |
-| `skip_fastqc`            | Skip FASTQC or not?                                                | `boolean` |                                           |          |        |
-| `skip_fastp`             | Skip trimming by FASTQP or not?                                    | `boolean` |                                           |          |        |
+| `fastqc_skip`            | Skip FASTQC or not?                                                | `boolean` | True                                      |          |        |
+| `fastp_skip`             | Skip trimming by FASTQP or not?                                    | `boolean` |                                           |          |        |
 | `min_trimmed_reads`      | Exclude a sample if its reads after trimming are below this number | `integer` | 10000                                     |          |        |
-| `extra_fastp_args`       | Extra FASTP arguments                                              | `string`  |                                           |          |        |
+| `fastp_extra_args`       | Extra FASTP arguments                                              | `string`  |                                           |          |        |
 | `save_trimmed`           | Save FASTQ files after trimming or not?                            | `boolean` |                                           |          |        |
 | `remove_ribo_rna`        | Remove Ribosomal RNA or not?                                       | `boolean` |                                           |          |        |
 | `save_non_ribo_reads`    | Save FASTQ files after Ribosomal RNA removal or not?               | `boolean` |                                           |          |        |
@@ -79,16 +80,6 @@ A Nextflow pipeline for single genome, multiple genomes and pan-genome annotatio
 | `busco_skip`             | Skip evaluation by BUSCO                                                    | `boolean` |                 |          |        |
 | `busco_lineage_datasets` | BUSCO lineages as a space-separated list: 'fungi_odb10 microsporidia_odb10' | `string`  | eukaryota_odb10 |          |        |
 
-## Max job request options
-
-Set the top limit for requested resources for any single job.
-
-| Parameter    | Description                                                                        | Type      | Default | Required | Hidden |
-| ------------ | ---------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
-| `max_cpus`   | Maximum number of CPUs that can be requested for any single job.                   | `integer` | 16      |          |        |
-| `max_memory` | Maximum amount of memory that can be requested for any single job. Example: '8.GB' | `string`  | 72.GB   |          |        |
-| `max_time`   | Maximum amount of time that can be requested for any single job. Example: '1.day'  | `string`  | 7.day   |          |        |
-
 ## Institutional config options
 
 Parameters used to describe centralised config profiles. These should not be edited.
@@ -99,25 +90,17 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `custom_config_base`         | Base directory for Institutional configs. | `string` | https://raw.githubusercontent.com/nf-core/configs/master |          | True   |
 | `config_profile_name`        | Institutional config name.                | `string` |                                                          |          | True   |
 | `config_profile_description` | Institutional config description.         | `string` |                                                          |          | True   |
-| `config_profile_contact`     | Institutional config contact information. | `string` |                                                          |          | True   |
-| `config_profile_url`         | Institutional config URL link.            | `string` |                                                          |          | True   |
 
 ## Generic options
 
 Less common options for the pipeline, typically set in a config file.
 
-| Parameter                          | Description                                                             | Type      | Default                                                  | Required | Hidden |
-| ---------------------------------- | ----------------------------------------------------------------------- | --------- | -------------------------------------------------------- | -------- | ------ |
-| `help`                             | Display help text.                                                      | `boolean` |                                                          |          | True   |
-| `version`                          | Display version and exit.                                               | `boolean` |                                                          |          | True   |
-| `publish_dir_mode`                 | Method used to save pipeline results to output directory.               | `string`  | copy                                                     |          | True   |
-| `email`                            | Email address for completion summary.                                   | `string`  |                                                          |          | True   |
-| `email_on_fail`                    | Email address for completion summary, only when pipeline fails.         | `string`  |                                                          |          | True   |
-| `plaintext_email`                  | Send plain-text email instead of HTML.                                  | `boolean` |                                                          |          | True   |
-| `monochrome_logs`                  | Do not use coloured log outputs.                                        | `boolean` |                                                          |          | True   |
-| `hook_url`                         | Incoming hook URL for messaging service                                 | `string`  |                                                          |          | True   |
-| `validate_params`                  | Boolean whether to validate parameters against the schema at runtime    | `boolean` | True                                                     |          | True   |
-| `validationShowHiddenParams`       | Show all params when using `--help`                                     | `boolean` |                                                          |          | True   |
-| `validationFailUnrecognisedParams` | Validation of parameters fails when an unrecognised parameter is found. | `boolean` |                                                          |          | True   |
-| `validationLenientMode`            | Validation of parameters in lenient more.                               | `boolean` |                                                          |          | True   |
-| `pipelines_testdata_base_path`     | Base path for pipeline test datasets                                    | `string`  | https://raw.githubusercontent.com/nf-core/test-datasets/ |          | True   |
+| Parameter                | Description                                                       | Type      | Default | Required | Hidden |
+| ------------------------ | ----------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `version`                | Display version and exit.                                         | `boolean` |         |          | True   |
+| `publish_dir_mode`       | Method used to save pipeline results to output directory.         | `string`  | copy    |          | True   |
+| `email_on_fail`          | Email address for completion summary, only when pipeline fails.   | `string`  |         |          | True   |
+| `plaintext_email`        | Send plain-text email instead of HTML.                            | `boolean` |         |          | True   |
+| `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string`  | 25.MB   |          | True   |
+| `monochrome_logs`        | Do not use coloured log outputs.                                  | `boolean` |         |          | True   |
+| `hook_url`               | Incoming hook URL for messaging service                           | `string`  |         |          | True   |

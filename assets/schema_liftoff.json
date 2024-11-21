@@ -1,25 +1,24 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/master/assets/schema_liftoff.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/main/assets/schema_liftoff.json",
     "title": "plant-food-research-open/genepal pipeline - params.liftoff_annotations schema",
     "description": "Schema for the file provided with params.liftoff_annotations",
     "type": "array",
     "items": {
-        "type": "object",
         "properties": {
             "fasta": {
                 "type": "string",
                 "pattern": "^\\S+\\.f(a|asta|as|sa|na)(\\.gz)?$",
-                "errorMessage": "FASTA file path cannot contain spaces and must have extension '.f(a|asta|as|sa|na)' or '.f(a|asta|as|sa|na).gz'",
-                "unique": true
+                "errorMessage": "FASTA file path cannot contain spaces and must have extension '.f(a|asta|as|sa|na)' or '.f(a|asta|as|sa|na).gz'"
             },
             "gff3": {
                 "type": "string",
                 "pattern": "^\\S+\\.gff(3)?(\\.gz)?$",
-                "errorMessage": "Annotation GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'",
-                "unique": true
+                "errorMessage": "Annotation GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'"
             }
         },
+        "type": "object",
+        "uniqueEntries": ["fasta", "gff3"],
         "required": ["fasta", "gff3"]
     }
 }

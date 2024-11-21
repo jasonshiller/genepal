@@ -1,2 +1,2 @@
-tag,fasta
-arguta,tests/stub/proteins/arguta_proteins.faa
+tag    ,fasta
+arguta ,https://raw.githubusercontent.com/Plant-Food-Research-Open/genepal/24a8f50e241105b98c88035fd9c2a0cad8ff728f/tests/stub/proteins/arguta_proteins.faa

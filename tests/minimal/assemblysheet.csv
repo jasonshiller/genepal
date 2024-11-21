@@ -1,2 +1,2 @@
-tag,fasta,is_masked
-a_thaliana,https://raw.githubusercontent.com/Gaius-Augustus/BRAKER/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471/example/genome.fa,yes
+tag        ,fasta                                                                                                              ,is_masked
+a_thaliana ,https://raw.githubusercontent.com/Gaius-Augustus/BRAKER/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471/example/genome.fa ,yes

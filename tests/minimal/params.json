@@ -1,6 +1,0 @@
-{
-    "input": "tests/minimal/assemblysheet.csv",
-    "protein_evidence": "https://raw.githubusercontent.com/Gaius-Augustus/BRAKER/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471/example/proteins.fa",
-    "braker_extra_args": "--gm_max_intergenic 10000 --skipOptimize",
-    "busco_lineage_datasets": "eudicots_odb10"
-}

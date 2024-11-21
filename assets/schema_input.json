@@ -1,17 +1,15 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/master/assets/schema_input.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/main/assets/schema_input.json",
     "title": "plant-food-research-open/genepal pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
-        "type": "object",
         "properties": {
             "tag": {
                 "type": "string",
                 "pattern": "^\\w+$",
-                "errorMessage": "Assembly tags must be provided and can only contain alphanumeric characters including '_'",
-                "unique": true
+                "errorMessage": "Assembly tags must be provided and can only contain alphanumeric characters including '_'"
             },
             "fasta": {
                 "type": "string",
@@ -47,8 +45,7 @@
                         "maxLength": 0
                     }
                 ],
-                "errorMessage": "BRAKER GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'",
-                "dependentRequired": ["braker_hints"]
+                "errorMessage": "BRAKER GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'"
             },
             "braker_hints": {
                 "anyOf": [
@@ -61,23 +58,28 @@
                         "maxLength": 0
                     }
                 ],
-                "errorMessage": "BRAKER hints GFF/GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'",
-                "dependentRequired": ["braker_gff3"]
+                "errorMessage": "BRAKER hints GFF/GFF3 file path cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'"
             },
             "benchmark": {
                 "anyOf": [
                     {
                         "type": "string",
-                        "pattern": "^\\S+\\.gff(3)?$"
+                        "pattern": "^\\S+\\.gff(3)?(\\.gz)?$"
                     },
                     {
                         "type": "string",
                         "maxLength": 0
                     }
                 ],
-                "errorMessage": "GFF/GFF3 file for benchmarking cannot contain spaces and must have extension '.gff' or '.gff3'"
+                "errorMessage": "GFF/GFF3 file for benchmarking cannot contain spaces and must have extension '.gff.gz', '.gff3.gz', '.gff' or '.gff3'"
             }
         },
-        "required": ["tag", "fasta", "is_masked"]
+        "type": "object",
+        "uniqueEntries": ["tag"],
+        "required": ["tag", "fasta", "is_masked"],
+        "dependentRequired": {
+            "braker_gff3": ["braker_hints"],
+            "braker_hints": ["braker_gff3"]
+        }
     }
 }

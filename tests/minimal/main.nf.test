@@ -1,0 +1,56 @@
+nextflow_pipeline {
+
+    name "Test corresponding to 'test' profile"
+    script "main.nf"
+
+    test("profile - test") {
+
+        when {
+            params {
+                input               = "$baseDir/tests/minimal/assemblysheet.csv"
+                protein_evidence    = "https://raw.githubusercontent.com/Gaius-Augustus/BRAKER/f58479fe5bb13a9e51c3ca09cb9e137cab3b8471/example/proteins.fa"
+                braker_extra_args   = "--gm_max_intergenic 10000 --skipOptimize"
+                busco_skip          = true
+                outdir              = "$outputDir"
+            }
+        }
+
+        then {
+            def stable_path = getAllFilesFromDir(
+                params.outdir,
+                false,
+                [
+                    'pipeline_info/*.{html,json,txt,yml}',
+                    'multiqc_report.html',
+                    'genepal_report.html'
+                ],
+                null,
+                ['**']
+            )
+
+            def stable_name = getAllFilesFromDir(
+                params.outdir,
+                true,
+                [
+                    'pipeline_info/*.{html,json,txt,yml}'
+                ],
+                null,
+                ['**']
+            )
+
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    [
+                        'successful tasks': workflow.trace.succeeded().size(),
+                        'versions': removeNextflowVersion("$outputDir/pipeline_info/genepal_software_mqc_versions.yml"),
+                        'stable paths': stable_path,
+                        'stable names': getRelativePath(stable_name, outputDir),
+                    ]
+                ).match() }
+            )
+        }
+
+    }
+
+}

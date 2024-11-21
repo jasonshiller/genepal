@@ -1,25 +1,24 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/master/assets/schema_orthofinder.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/main/assets/schema_orthofinder.json",
     "title": "plant-food-research-open/genepal pipeline - params.orthofinder_annotations schema",
     "description": "Schema for the file provided with params.orthofinder_annotations",
     "type": "array",
     "items": {
-        "type": "object",
         "properties": {
             "tag": {
                 "type": "string",
                 "pattern": "^\\w+$",
-                "errorMessage": "Annotation tags must be provided and can only contain alphanumeric characters including '_'",
-                "unique": true
+                "errorMessage": "Annotation tags must be provided and can only contain alphanumeric characters including '_'"
             },
             "fasta": {
                 "type": "string",
                 "pattern": "^\\S+\\.(fa|fas|pep|faa|fasta)(\\.gz)?$",
-                "errorMessage": "Proteins FASTA file path cannot contain spaces and must have extension '.(fa|fas|pep|faa|fasta)' or '.(fa|fas|pep|faa|fasta).gz'. Orthofinder does not allow 'fna' extension",
-                "unique": true
+                "errorMessage": "Proteins FASTA file path cannot contain spaces and must have extension '.(fa|fas|pep|faa|fasta)' or '.(fa|fas|pep|faa|fasta).gz'. Orthofinder does not allow 'fna' extension"
             }
         },
+        "type": "object",
+        "uniqueEntries": ["tag", "fasta"],
         "required": ["tag", "fasta"]
     }
 }

@@ -1,2 +1,2 @@
-tests/stub/ext_prot/RU01.20221115150135.chr1.pep.fasta.gz
-tests/stub/ext_prot/RU01.20221115150135.chr2.pep.fasta.gz
+https://raw.githubusercontent.com/Plant-Food-Research-Open/genepal/24a8f50e241105b98c88035fd9c2a0cad8ff728f/tests/stub/ext_prot/RU01.20221115150135.chr1.pep.fasta.gz
+https://raw.githubusercontent.com/Plant-Food-Research-Open/genepal/24a8f50e241105b98c88035fd9c2a0cad8ff728f/tests/stub/ext_prot/RU01.20221115150135.chr2.pep.fasta.gz

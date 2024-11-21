@@ -1,0 +1,89 @@
+{
+    "profile - test": {
+        "content": [
+            {
+                "successful tasks": 18,
+                "versions": {
+                    "AGAT_CONVERTSPGFF2GTF": {
+                        "agat": "v1.4.0"
+                    },
+                    "AGAT_CONVERTSPGXF2GXF": {
+                        "agat": "v1.4.0"
+                    },
+                    "AGAT_SPADDINTRONS": {
+                        "agat": "v1.4.0"
+                    },
+                    "AGAT_SPEXTRACTSEQUENCES": {
+                        "agat": "v1.4.0"
+                    },
+                    "BRAKER3": {
+                        "braker3": "3.0.8",
+                        "augustus": "3.5.0",
+                        "genemark-etp": 1.02,
+                        "prothint": "2.6.0"
+                    },
+                    "CAT_PROTEIN_FASTAS": {
+                        "pigz": "2.3.4"
+                    },
+                    "EXTRACT_PROTEINS": {
+                        "gffread": "0.12.7"
+                    },
+                    "FASTAVALIDATOR": {
+                        "py_fasta_validator": 0.6
+                    },
+                    "FINAL_GFF_CHECK": {
+                        "genometools": "1.6.5"
+                    },
+                    "GFF2FASTA_FOR_EGGNOGMAPPER": {
+                        "gffread": "0.12.7"
+                    },
+                    "GT_GFF3": {
+                        "genometools": "1.6.5"
+                    },
+                    "SAVE_MARKED_GFF3": {
+                        "pigz": "2.3.4"
+                    },
+                    "SEQKIT_RMDUP": {
+                        "seqkit": "v2.8.0"
+                    },
+                    "STAR_GENOMEGENERATE": {
+                        "star": "2.7.10a",
+                        "samtools": 1.18,
+                        "gawk": "5.1.0"
+                    },
+                    "TSEBRA": {
+                        "tsebra": "1.1.2.5"
+                    },
+                    "Workflow": {
+                        "plant-food-research-open/genepal": "v0.5.0"
+                    }
+                },
+                "stable paths": [
+                    "a_thaliana.gt.gff3:md5,8ab16549095f605ff8715ac4a3de58ed",
+                    "a_thaliana.pep.fasta:md5,4994c0393ca0245a1c57966d846d101e",
+                    "a_thaliana.gff3:md5,d23d16cd86499d48a30ffb981ed27891",
+                    "summary_stats.json:md5,007ba5cf2b7a2fd395a27d9458ca2d2e"
+                ],
+                "stable names": [
+                    "annotations",
+                    "annotations/a_thaliana",
+                    "annotations/a_thaliana/a_thaliana.gt.gff3",
+                    "annotations/a_thaliana/a_thaliana.pep.fasta",
+                    "etc",
+                    "etc/splicing_marked",
+                    "etc/splicing_marked/a_thaliana.gff3",
+                    "genepal_data",
+                    "genepal_data/summary_stats.json",
+                    "genepal_report.html",
+                    "multiqc_report.html",
+                    "pipeline_info"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-19T11:35:02.477202"
+    }
+}

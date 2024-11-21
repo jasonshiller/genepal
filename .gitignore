@@ -1,12 +1,17 @@
 .nextflow*
 work/
 data/
-null/
 results/
 .DS_Store
 testing/
 testing*
 *.pyc
 
+# PFR files
 *.stdout
 *.stderr
+
+# nf-test files
+.nf-test/
+.nf-test.log
+null/

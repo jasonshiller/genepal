@@ -1,2 +1,2 @@
-tag,fasta,is_masked
-sarscov2,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/genome/genome.fasta.gz,no
+tag      ,fasta                                                                                                         ,is_masked
+sarscov2 ,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/genome/genome.fasta.gz ,no

@@ -1,0 +1,39 @@
+nextflow_pipeline {
+
+    name "Test the entire pipeline in stub mode"
+    script "main.nf"
+
+    test("full - stub") {
+        options '-stub'
+
+        when {
+            params {
+                input                   = "$baseDir/tests/stub/assemblysheet.csv"
+                protein_evidence        = "$baseDir/tests/stub/external-protein-fastas.txt"
+                eggnogmapper_db_dir     = "$baseDir/tests/stub/emapperdb/5.0.2"
+                eggnogmapper_tax_scope  = 33090
+                rna_evidence            = "$baseDir/tests/stub/rnasheet.csv"
+                liftoff_annotations     = "$baseDir/tests/stub/liftoffannotations.csv"
+                orthofinder_annotations = "$baseDir/tests/stub/orthofinderannotations.csv"
+                outdir                  = "$outputDir"
+            }
+        }
+
+        then {
+            def stable_path = getAllFilesFromDir(params.outdir, false, ['pipeline_info/*.{html,json,txt,yml}'], null, ['**'])
+
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    [
+                        'successful tasks': workflow.trace.succeeded().size(),
+                        'versions': removeNextflowVersion("$outputDir/pipeline_info/genepal_software_mqc_versions.yml"),
+                        'stable paths': stable_path
+                    ]
+                ).match() }
+            )
+        }
+
+    }
+
+}

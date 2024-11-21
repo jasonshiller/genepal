@@ -6,6 +6,5 @@
     "rna_evidence": "tests/stub/rnasheet.csv",
     "liftoff_annotations": "tests/stub/liftoffannotations.csv",
     "orthofinder_annotations": "tests/stub/orthofinderannotations.csv",
-    "max_cpus": 2,
-    "max_memory": "3.GB"
+    "outdir": "results"
 }

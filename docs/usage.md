@@ -5,6 +5,7 @@
 > This document does not describe every pipeline parameter. For an exhaustive list of parameters, see [parameters.md](./parameters.md).
 
 - [Assemblysheet input](#assemblysheet-input)
+  - [Advanced inputs for manual resume](#advanced-inputs-for-manual-resume)
 - [Protein evidence](#protein-evidence)
   - [BRAKER workflow](#braker-workflow)
 - [RNASeq evidence](#rnaseq-evidence)
@@ -27,7 +28,6 @@
   - [Custom Containers](#custom-containers)
   - [Custom Tool Arguments](#custom-tool-arguments)
   - [nf-core/configs](#nf-coreconfigs)
-- [Azure Resource Requests](#azure-resource-requests)
 - [Running in the background](#running-in-the-background)
 - [Nextflow memory requirements](#nextflow-memory-requirements)
 
@@ -40,7 +40,17 @@ You will need to create an assemblysheet with information about the genome assem
 - `tag:` A unique tag which represents the target assembly throughout the pipeline. The `tag` and `fasta` file name should not be same, such as `tag.fasta`. This can create file name collisions in the pipeline or result in file overwrite. It is also a good-practice to make all the input files read-only.
 - `fasta:` FASTA file for the genome
 - `is_masked:` Whether the FASTA is masked or not? Use yes/no to indicate the masking. If the assembly is not masked. The pipeline will soft mask it before annotating it.
-- `te_lib [Optional]`: If an assembly is not masked and a TE library is available which cna be used to mask the assembly, the path of the TE library FASTA file can be provided here. If this column is absent and the assembly is not masked, the pipeline will first create a TE library so that it can soft mask the assembly.
+- `te_lib [Optional]:` If an assembly is not masked and a TE library is available which cna be used to mask the assembly, the path of the TE library FASTA file can be provided here. If this column is absent and the assembly is not masked, the pipeline will first create a TE library so that it can soft mask the assembly.
+- `benchmark [Optional]:` A GFF3 file which can be used to benchmark or compare the results of the pipeline against an existing annotation.
+
+### Advanced inputs for manual resume
+
+If the pipeline fails while processing large datasets, it is advisable to backup the repeat-masked genomes and the BRAKER outputs before attempting a [Nextflow resume](https://www.nextflow.io/docs/latest/cache-and-resume.html#caching-and-resuming). If the resume fails, these outputs from the first pipeline run can be used to setup a manual resume. This can be achieved by providing the repeat-masked genomes under the `fasta` column along with `is_masked` column set to `yes`. The BRAKER outputs can be provided under the following columns,
+
+- `braker_gff3 [Optional]:` BRAKER GFF3 file
+- `braker_hints [Optional]:` BRAKER hints file in GFF3 format
+
+The pipeline will automatically skip the repeat modelling, masking and BRAKER steps. It will still perform these steps for those genomes for which these files are not provided. These files are not saved by the pipeline by default. To save the files, set the `repeatmasker_save_outputs` and `braker_save_outputs` parameters to `true`.
 
 ## Protein evidence
 
@@ -59,7 +69,7 @@ With these two parameters, the pipeline has sufficient inputs to execute the [BR
 RNASeq evidence must be provided through a samplesheet in CSV format which has the following columns,
 
 - `sample:` A sample identifier. The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis.
-- `file_1:` A FASTQ or BAM file
+- `file_1:` A SRA ID for paired-end reads or FASTQ or BAM file
 - `file_2:` A FASTQ file if `file_1` is also a FASTQ file and provides paired samples.
 - `target_assemblies:` A semicolon `;` separated list of assembly tags from the [assemblysheet input](#assemblysheet-input). If `file_1` points to a BAM file, only a single assembly can be listed under `target_assemblies` for that sample. FASTQ data from `file_1` and `file_2` is aligned against each target assembly. BAM data from `file_1` is considered already aligned against the target assembly and is directly fed to BRAKER.
 
@@ -69,7 +79,7 @@ If RNASeq evidence is provided, the pipeline executes the [BRAKER workflow D](ht
 
 ### Preprocessing
 
-RNASeq reads provided in FASTQ files are by default trimmed with [FASTP](https://github.com/OpenGene/fastp). No parameters are provided by default. Although, additional parameters can be provided with `--extra_fastp_args` parameter. After trimming, any sample which does not have `10000` reads left is dropped. This threshold can be specified with the `--min_trimmed_reads` parameter. If trimming was already performed ot it is not desirable, it can be skipped by setting the `--skip_fastp` flag to `true`.
+RNASeq reads provided in FASTQ files are by default trimmed with [FASTP](https://github.com/OpenGene/fastp). No parameters are provided by default. Although, additional parameters can be provided with `--fastp_extra_args` parameter. After trimming, any sample which does not have `10000` reads left is dropped. This threshold can be specified with the `--min_trimmed_reads` parameter. If trimming was already performed ot it is not desirable, it can be skipped by setting the `--fastp_skip` flag to `true`.
 
 Optionally, [SORTMERNA](https://github.com/sortmerna/sortmerna) can be activated by setting the `--remove_ribo_rna` flag to `true`. A default list of rRNA databases is pre-configured and can be seen in the [assets/rrna-db-defaults.txt](../assets/rrna-db-defaults.txt) file. A path to a custom list of databases can be specified by the `--ribo_database_manifest` parameter.
 
@@ -164,6 +174,7 @@ The typical command for running the pipeline is as follows:
 
 ```bash
 nextflow run plant-food-research-open/genepal \
+  -revision <version> \
   -profile <docker/singularity/.../institute> \
   --input assemblysheet.csv \
   --protein_evidence proteins.faa \
@@ -191,12 +202,12 @@ Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <
 The above pipeline run specified with a params file in yaml format:
 
 ```bash
-nextflow run plant-food-research-open/genepal -profile docker -params-file params.yaml
+nextflow run plant-food-research-open/genepal -revision main -profile docker -params-file params.yaml
 ```
 
-with `params.yaml` containing:
+with:
 
-```yaml
+```yaml title="params.yaml"
 input: './assemblysheet.csv'
 outdir: './results/'
 protein_evidence: './proteins.faa'
@@ -304,14 +315,6 @@ In most cases, you will only need to create a custom config as a one-off but if 
 See the main [Nextflow documentation](https://www.nextflow.io/docs/latest/config.html) for more information about creating your own configuration files.
 
 If you have any questions or issues please send us a message on [Slack](https://nf-co.re/join/slack) on the [`#configs` channel](https://nfcore.slack.com/channels/configs).
-
-## Azure Resource Requests
-
-To be used with the `azurebatch` profile by specifying the `-profile azurebatch`.
-We recommend providing a compute `params.vm_type` of `Standard_D16_v3` VMs by default but these options can be changed if required.
-
-Note that the choice of VM size depends on your quota and the overall workload during the analysis.
-For a thorough list, please refer the [Azure Sizes for virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes).
 
 ## Running in the background
 

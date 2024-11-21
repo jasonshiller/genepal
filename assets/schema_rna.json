@@ -1,11 +1,10 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/master/assets/schema_rna.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/plant-food-research-open/genepal/main/assets/schema_rna.json",
     "title": "plant-food-research-open/genepal pipeline - params.rna_evidence schema",
     "description": "Schema for the file provided with params.rna_evidence",
     "type": "array",
     "items": {
-        "type": "object",
         "properties": {
             "sample": {
                 "type": "string",
@@ -15,9 +14,8 @@
             },
             "file_1": {
                 "type": "string",
-                "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
-                "errorMessage": "FASTQ file for reads 1 or BAM file containing mapped reads must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'",
-                "unique": true
+                "pattern": "^SRR\\w+$|^\\S+\\.(f(ast)?q\\.gz|bam)$",
+                "errorMessage": "SRA ID that begins with SRR or FASTQ file for reads 1 or BAM file containing mapped reads must be provided. Files cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
             },
             "file_2": {
                 "errorMessage": "FASTQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",
@@ -30,9 +28,7 @@
                         "type": "string",
                         "maxLength": 0
                     }
-                ],
-                "dependentRequired": ["file_1"],
-                "unique": true
+                ]
             },
             "target_assemblies": {
                 "type": "string",
@@ -41,6 +37,11 @@
                 "meta": ["target_assemblies"]
             }
         },
-        "required": ["sample", "file_1", "target_assemblies"]
+        "type": "object",
+        "uniqueEntries": ["file_1", "file_2"],
+        "required": ["sample", "file_1", "target_assemblies"],
+        "dependentRequired": {
+            "file_2": ["file_1"]
+        }
     }
 }

@@ -1,5 +1,0 @@
-{
-    "input": "tests/nonmasked/assemblysheet.csv",
-    "protein_evidence": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/024/255/GCA_003024255.1_Red5_PS1_1.69.0/GCA_003024255.1_Red5_PS1_1.69.0_protein.faa.gz",
-    "busco_lineage_datasets": "eudicots_odb10"
-}

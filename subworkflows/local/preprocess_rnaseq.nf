@@ -8,8 +8,8 @@ workflow PREPROCESS_RNASEQ {
     ch_reads                        // channel: [ [ id, single_end, target_assemblies ], [ [ fq ] ] ]
     permissible_assemblies          // val: assembly_a,assembly_b
     exclude_assemblies              // channel: val(assembly_x,assembly_y)
-    skip_fastqc                     // val: true|false
-    skip_fastp                      // val: true|false
+    fastqc_skip                     // val: true|false
+    fastp_skip                      // val: true|false
     save_trimmed                    // val: true|false
     min_trimmed_reads               // val: Integer
     remove_ribo_rna                 // val: true|false
@@ -60,11 +60,11 @@ workflow PREPROCESS_RNASEQ {
 
     FASTQ_FASTQC_UMITOOLS_FASTP (
         ch_cat_fastq,
-        skip_fastqc,
+        fastqc_skip,
         with_umi,
         skip_umi_extract,
         umi_discard_read,
-        skip_fastp,
+        fastp_skip,
         [],
         save_trimmed,
         save_trimmed,
@@ -81,7 +81,7 @@ workflow PREPROCESS_RNASEQ {
         }
     }
 
-    ch_versions                     = ch_versions.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.versions.first())
+    ch_versions                     = ch_versions.mix(FASTQ_FASTQC_UMITOOLS_FASTP.out.versions)
 
 
     // MODULE: SORTMERNA as SORTMERNA_INDEX
@@ -117,7 +117,10 @@ workflow PREPROCESS_RNASEQ {
 
 
     emit:
-    trim_reads                      = ch_emitted_reads  // channel: [ [ id, single_end ], [ fq ] ]
-    reads_target                    = ch_reads_target   // channel: [ [ id, single_end ], assembly_id ]
-    versions                        = ch_versions       // channel: [ versions.yml ]
+    trim_reads                      = ch_emitted_reads                                  // channel: [ [ id, single_end ], [ fq ] ]
+    reads_target                    = ch_reads_target                                   // channel: [ [ id, single_end ], assembly_id ]
+    fastqc_raw_zip                  = FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_raw_zip    // channel: [ [ id, single_end ], zip ]
+    trim_json                       = FASTQ_FASTQC_UMITOOLS_FASTP.out.trim_json         // channel: [ [ id, single_end ], json ]
+    fastqc_trim_zip                 = FASTQ_FASTQC_UMITOOLS_FASTP.out.fastqc_trim_zip   // channel: [ [ id, single_end ], zip ]
+    versions                        = ch_versions                                       // channel: [ versions.yml ]
 }

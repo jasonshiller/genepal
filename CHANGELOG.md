@@ -3,7 +3,44 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.4.0 - [04-Oct-2024]
+## v0.5.0 - [21-Nov-2024]
+
+### `Added`
+
+1. Added MultiQC [#65](https://github.com/plant-food-research-open/genepal/issues/65)
+2. Updated nf-core template to 3.0.2 [#66](https://github.com/PlantandFoodResearch/genepal/issues/66)
+3. Integrated nf-test into pipeline CI [#68](https://github.com/PlantandFoodResearch/genepal/issues/68)
+4. Updated the flowchart [#87](https://github.com/PlantandFoodResearch/genepal/issues/87)
+5. Added a large test dataset for the `test_full` profile [#90](https://github.com/PlantandFoodResearch/genepal/issues/90)
+6. Now `.gff.gz` and `.gff3.gz` inputs are also allowed for the `benchmark` column in `--input`
+7. Now removing liftoff genes with any intron shorted than 10bp [#89](https://github.com/Plant-Food-Research-Open/genepal/issues/89)
+8. Now also removing `rRNA` and `tRNA` after liftoff as the downstream logic in the pipeline can not correctly handle these
+9. Now skipping FastQC by default [#98](https://github.com/Plant-Food-Research-Open/genepal/issues/98)
+10. Added an HTML report [#44](https://github.com/Plant-Food-Research-Open/genepal/issues/44)
+11. Added content type as text/html for the MultiQC and genepal reports
+12. Added sra-tools for RNASeq data download [#102](https://github.com/Plant-Food-Research-Open/genepal/issues/102)
+
+### `Fixed`
+
+1. Now using `${meta.id}_trim` as prefix for `FASTQC` files
+2. Updated citations to include DOIs
+3. Fixed a bug where FASTQ versions were not correctly captured
+4. Now using the correct out channel from `STAR_ALIGN`. This bug was introduced by a module update during the development of this version [#74](https://github.com/Plant-Food-Research-Open/genepal/issues/74)
+5. Fixed OrthoFinder results copy failure on AWS [#108](https://github.com/Plant-Food-Research-Open/genepal/issues/108)
+
+### `Dependencies`
+
+1. Nextflow!>=24.04.2
+2. nf-schema@2.1.1
+
+### `Deprecated`
+
+1. Resource parameters have been removed: `max_memory`, `max_cpus`, `max_time`
+2. Removed a number of unnecessary parameters: `monochromeLogs`, `config_profile_contact`, `config_profile_url`, `validationFailUnrecognisedParams`, `validationLenientMode`, `validationSchemaIgnoreParams`, `validationShowHiddenParams`, `validate_params`
+3. Removed `extra_fastp_args` and replaced it with `fastp_extra_args`
+4. Removed and replaced `skip_fastp` and `skip_fastqc` with `fastp_skip` and `fastqc_skip` [#82](https://github.com/Plant-Food-Research-Open/genepal/issues/82)
+
+## v0.4.0 - [04-Oct-2024]
 
 ### `Added`
 
@@ -57,8 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 9. Now BRAKER3 outputs are not saved by default [#53](https://github.com/plant-food-research-open/genepal/issues/53) and saved under `etc` folder when enabled
 10. Removed `local` profile. Local executor is the default when no executor is specified. Therefore, the `local` profile was not needed.
 11. Removed `CUSTOM_DUMPSOFTWAREVERSIONS`
+12. `pipeline_info/software_versions.yml` has been replaced with `pipeline_info/genepal_software_mqc_versions.yml`
 
-## 0.3.3 - [18-Jun-2024]
+## v0.3.3 - [18-Jun-2024]
 
 ### `Added`
 
@@ -76,7 +114,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Deprecated`
 
-## 0.3.2 - [13-May-2024]
+## v0.3.2 - [13-May-2024]
 
 ### `Added`
 
@@ -94,7 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Deprecated`
 
-## 0.3.1 - [10-May-2024]
+## v0.3.1 - [10-May-2024]
 
 ### `Added`
 
@@ -109,7 +147,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Deprecated`
 
-## 0.3.0 - [30-April-2024]
+## v0.3.0 - [30-April-2024]
 
 ### `Added`
 

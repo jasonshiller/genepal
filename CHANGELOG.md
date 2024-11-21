@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.5.0dev - [20-Nov-2024]
+## v0.5.0dev - [21-Nov-2024]
 
 ### `Added`
 
@@ -24,8 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 1. Now using `${meta.id}_trim` as prefix for `FASTQC` files
 2. Updated citations to include DOIs
-3. Fixed a bug where FASTQ versions were not correctly captured.
+3. Fixed a bug where FASTQ versions were not correctly captured
 4. Now using the correct out channel from `STAR_ALIGN`. This bug was introduced by a module update during the development of this version [#74](https://github.com/Plant-Food-Research-Open/genepal/issues/74)
+5. Fixed OrthoFinder results copy failure on AWS [#108](https://github.com/Plant-Food-Research-Open/genepal/issues/108)
 
 ### `Dependencies`
 

@@ -223,7 +223,8 @@ workflow GENEPAL {
         ch_orthofinder_pep
     )
 
-    ch_orthofinder              = FASTA_ORTHOFINDER.out.orthofinder
+    ch_orthofinder_statistics   = FASTA_ORTHOFINDER.out.orthofinder_statistics
+    ch_orthofinder_hogs         = FASTA_ORTHOFINDER.out.orthofinder_hogs
     ch_versions                 = ch_versions.mix(FASTA_ORTHOFINDER.out.versions)
 
     // SUBWORKFLOW: FASTA_GXF_BUSCO_PLOT
@@ -348,12 +349,13 @@ workflow GENEPAL {
 
 
     GENEPALREPORT (
-        ch_saved_marked_gff3    .map { meta, file -> file   }   .collect()              ,
-        ch_orthofinder          .map { meta, dir -> dir     }   .collect()  .ifEmpty([]),
-        ch_busco_fasta_summary  .map { meta, file -> file   }   .collect()  .ifEmpty([]),
-        ch_busco_gff_summary    .map { meta, file -> file   }   .collect()  .ifEmpty([]),
-        ch_benchmark_stats      .map { meta, file -> file   }   .collect()  .ifEmpty([]),
-        ch_pipeline_info                                        .collect()
+        ch_saved_marked_gff3        .map { meta, file -> file   }   .collect()              ,
+        ch_orthofinder_statistics   .map { meta, dir -> dir     }   .collect()  .ifEmpty([]),
+        ch_orthofinder_hogs         .map { meta, dir -> dir     }   .collect()  .ifEmpty([]),
+        ch_busco_fasta_summary      .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_busco_gff_summary        .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_benchmark_stats          .map { meta, file -> file   }   .collect()  .ifEmpty([]),
+        ch_pipeline_info                                            .collect()
     )
 
     emit:

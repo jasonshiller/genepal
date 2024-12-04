@@ -139,6 +139,7 @@ The pipeline uses nf-core modules contributed by following authors:
 <a href="https://github.com/charles-plessy"><img src="https://github.com/charles-plessy.png" width="50" height="50"></a>
 <a href="https://github.com/bunop"><img src="https://github.com/bunop.png" width="50" height="50"></a>
 <a href="https://github.com/abhi18av"><img src="https://github.com/abhi18av.png" width="50" height="50"></a>
+<a href="https://github.com/liamlelievre"><img src="https://github.com/liamlelievre.png" width="50" height="50"></a>
 
 ## Contributions and Support
 

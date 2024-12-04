@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v0.6.0 - [4-Dec-2024]
+
+### 'Added'
+
+1. Added cDNA and cds outputs to <OUTPUT_DIR>/annotations/<SAMPLE> directory [#118](https://github.com/Plant-Food-Research-Open/genepal/issues/118)
+
 ## v0.5.0 - [21-Nov-2024]
 
 ### `Added`
@@ -19,8 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 10. Added an HTML report [#44](https://github.com/Plant-Food-Research-Open/genepal/issues/44)
 11. Added content type as text/html for the MultiQC and genepal reports
 12. Added sra-tools for RNASeq data download [#102](https://github.com/Plant-Food-Research-Open/genepal/issues/102)
-13. Added cDNA and cds outputs to <OUTPUT_DIR>/annotations/<SAMPLE> directory [#118](https://github.com/Plant-Food-Research-Open/genepal/issues/118)
-
+    
 ### `Fixed`
 
 1. Now using `${meta.id}_trim` as prefix for `FASTQC` files

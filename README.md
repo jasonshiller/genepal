@@ -97,7 +97,7 @@ sbatch ./pfr_genepal
 
 plant-food-research-open/genepal workflows were originally scripted by Jason Shiller ([@jasonshiller](https://github.com/jasonshiller)). Usman Rashid ([@gallvp](https://github.com/gallvp)) wrote the Nextflow pipeline.
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+We thank the following people for extensive assistance in the development of the pipeline,
 
 - Cecilia Deng [@CeciliaDeng](https://github.com/CeciliaDeng)
 - Charles David [@charlesdavid](https://github.com/charlesdavid)
@@ -106,6 +106,10 @@ We thank the following people for their extensive assistance in the development 
 - Ross Crowhurst [@rosscrowhurst](https://github.com/rosscrowhurst)
 - Susan Thomson [@cflsjt](https://github.com/cflsjt)
 - Ting-Hsuan Chen [@ting-hsuan-chen](https://github.com/ting-hsuan-chen)
+
+and for contributions to the codebase,
+
+- Liam Le Lievre [@liamlelievre](https://github.com/liamlelievre)
 
 The pipeline uses nf-core modules contributed by following authors:
 

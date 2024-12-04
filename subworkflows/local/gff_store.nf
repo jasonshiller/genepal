@@ -154,6 +154,7 @@ workflow GFF_STORE {
     EXTRACT_CDNA(
         ch_cdna_extraction_inputs.map { meta, gff, fasta -> [ meta, gff ] },
         ch_cdna_extraction_inputs.map { meta, gff, fasta -> fasta}
+    )
 
     ch_final_cdna                = EXTRACT_CDNA.out.gffread_fasta
     ch_versions                  = ch_versions.mix(EXTRACT_CDNA.out.versions.first())

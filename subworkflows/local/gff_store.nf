@@ -3,6 +3,7 @@ import java.net.URLEncoder
 include { GT_GFF3 as FINAL_GFF_CHECK    } from '../../modules/nf-core/gt/gff3/main'
 include { GFFREAD as EXTRACT_PROTEINS   } from '../../modules/nf-core/gffread/main'
 include { GFFREAD as EXTRACT_CDS        } from '../../modules/nf-core/gffread/main'
+include { GFFREAD as EXTRACT_CDNA       } from '../../modules/nf-core/gffread/main'
 
 workflow GFF_STORE {
     take:
@@ -146,9 +147,21 @@ workflow GFF_STORE {
     ch_final_cds                = EXTRACT_CDS.out.gffread_fasta
     ch_versions                 = ch_versions.mix(EXTRACT_CDS.out.versions.first())
 
+    // MODULE: GFFREAD as EXTRACT_CDNA
+    ch_cdna_extraction_inputs    = ch_final_gff
+                                | join(ch_fasta)
+
+    EXTRACT_CDNA(
+        ch_cdna_extraction_inputs.map { meta, gff, fasta -> [ meta, gff ] },
+        ch_cdna_extraction_inputs.map { meta, gff, fasta -> fasta}
+
+    ch_final_cdna                = EXTRACT_CDNA.out.gffread_fasta
+    ch_versions                  = ch_versions.mix(EXTRACT_CDNA.out.versions.first())
+
     emit:
     final_gff                   = ch_final_gff          // [ meta, gff ]
     final_proteins              = ch_final_proteins     // [ meta, fasta ]
     final_cds                   = ch_final_cds          // [ meta, fasta ] 
+    final_cdna                  = ch_final_cdna         // [ meta, fasta ]
     versions                    = ch_versions           // [ versions.yml ]
 }

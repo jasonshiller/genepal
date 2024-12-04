@@ -135,12 +135,12 @@ workflow GFF_STORE {
     ch_versions                 = ch_versions.mix(EXTRACT_PROTEINS.out.versions.first())
 
     // MODULE: GFFREAD as EXTRACT_CDS
-    ch_cds_extraction_inputs    = ch_final_gff | join(ch_fasta)
+    ch_cds_extraction_inputs    = ch_final_gff
+                                | join(ch_fasta)
 
     EXTRACT_CDS(
         ch_cds_extraction_inputs.map { meta, gff, fasta -> [ meta, gff ] },
-        ch_cds_extraction_inputs.map { meta, gff, fasta -> fasta },
-        ext.args: '-w' // Extract CDS
+        ch_cds_extraction_inputs.map { meta, gff, fasta -> fasta }
     )
 
     ch_final_cds                = EXTRACT_CDS.out.gffread_fasta
@@ -149,6 +149,6 @@ workflow GFF_STORE {
     emit:
     final_gff                   = ch_final_gff          // [ meta, gff ]
     final_proteins              = ch_final_proteins     // [ meta, fasta ]
-    final_cds			= ch_final_cds		// [ meta, fasta ] 
+    final_cds                   = ch_final_cds          // [ meta, fasta ] 
     versions                    = ch_versions           // [ versions.yml ]
 }

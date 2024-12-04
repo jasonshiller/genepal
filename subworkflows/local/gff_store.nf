@@ -1,5 +1,3 @@
-import java.net.URLEncoder
-
 include { GT_GFF3 as FINAL_GFF_CHECK    } from '../../modules/nf-core/gt/gff3/main'
 include { GFFREAD as EXTRACT_PROTEINS   } from '../../modules/nf-core/gffread/main'
 include { GFFREAD as EXTRACT_CDS        } from '../../modules/nf-core/gffread/main'
@@ -68,8 +66,8 @@ workflow GFF_STORE {
                                             }
 
                                             def anno    = tx_annotations.containsKey(tx_id)
-                                                        ? URLEncoder.encode(tx_annotations[tx_id], "UTF-8").replace('+', '%20')
-                                                        : URLEncoder.encode('Hypothetical protein | no eggnog hit', "UTF-8").replace('+', '%20')
+                                                        ? java.net.URLEncoder.encode(tx_annotations[tx_id], "UTF-8").replace('+', '%20')
+                                                        : java.net.URLEncoder.encode('Hypothetical protein | no eggnog hit', "UTF-8").replace('+', '%20')
 
                                             gene_tx_annotations[gene_id] += [ ( tx_id ): anno ]
                                         }

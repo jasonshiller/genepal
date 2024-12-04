@@ -162,7 +162,7 @@ workflow GFF_STORE {
     emit:
     final_gff                   = ch_final_gff          // [ meta, gff ]
     final_proteins              = ch_final_proteins     // [ meta, fasta ]
-    final_cds                   = ch_final_cds          // [ meta, fasta ] 
+    final_cds                   = ch_final_cds          // [ meta, fasta ]
     final_cdna                  = ch_final_cdna         // [ meta, fasta ]
     versions                    = ch_versions           // [ versions.yml ]
 }

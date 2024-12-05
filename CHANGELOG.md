@@ -3,11 +3,26 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.6.0 - [4-Dec-2024]
+## v0.6.0 - [6-Dec-2024]
 
 ### 'Added'
 
 1. Added cDNA and CDS outputs to <OUTPUT_DIR>/annotations/<SAMPLE> directory [#118](https://github.com/Plant-Food-Research-Open/genepal/issues/118)
+2. Added parameter `add_attrs_to_proteins_cds_fastas`
+
+### `Fixed`
+
+1. Fixed an issue where TSEBRA failed because LIFTOFF lifted non-protein coding genes [#121](https://github.com/Plant-Food-Research-Open/genepal/issues/121)
+2. Switched branch name from `master` to `main` in the GHA CIs
+
+### `Dependencies`
+
+1. Nextflow!>=24.04.2
+2. nf-schema@2.1.1
+
+### `Deprecated`
+
+1. Removed parameter `add_attrs_to_proteins_fasta`
 
 ## v0.5.0 - [21-Nov-2024]
 

@@ -35,7 +35,7 @@
   - Merge multi-reference liftoffs
   - Remove liftoff transcripts marked by _valid_ORF=False_
   - Remove liftoff genes with any intron shorter than 10 bp
-  - Remove rRNA and tRNA from liftoff
+  - Remove rRNA, tRNA and other non-protein coding models from liftoff
   - Optionally, allow or remove iso-forms
   - Remove BRAKER models from Liftoff loci
   - Merge Liftoff and BRAKER models

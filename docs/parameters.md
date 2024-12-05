@@ -4,17 +4,19 @@ A Nextflow pipeline for consensus, phased and pan-genome annotation.
 
 ## Input/output options
 
-| Parameter                 | Description                                                                                              | Type      | Default | Required | Hidden |
-| ------------------------- | -------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
-| `input`                   | Target assemblies listed in a CSV sheet                                                                  | `string`  |         | True     |        |
-| `protein_evidence`        | Protein evidence provided as a fasta file or multiple fasta files listed in a plain txt file             | `string`  |         | True     |        |
-| `eggnogmapper_db_dir`     | Eggnogmapper database directory                                                                          | `string`  |         |          |        |
-| `eggnogmapper_tax_scope`  | Eggnogmapper taxonomy scopre. Eukaryota: 2759, Viridiplantae: 33090, Archaea: 2157, Bacteria: 2, root: 1 | `integer` | 1       |          |        |
-| `rna_evidence`            | FASTQ/BAM samples listed in a CSV sheet                                                                  | `string`  |         |          |        |
-| `liftoff_annotations`     | Reference annotations listed in a CSV sheet                                                              | `string`  |         |          |        |
-| `orthofinder_annotations` | Additional annotations for orthology listed in a CSV sheet                                               | `string`  |         |          |        |
-| `outdir`                  | The output directory where the results will be saved                                                     | `string`  |         | True     |        |
-| `email`                   | Email address for completion summary.                                                                    | `string`  |         |          | True   |
+| Parameter                | Description                                                                                              | Type      | Default | Required | Hidden |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- | ------ |
+| `input`                  | Target assemblies listed in a CSV sheet                                                                  | `string`  |         | True     |        |
+| `protein_evidence`       | Protein evidence provided as a fasta file or multiple fasta files listed in a plain txt file             | `string`  |         | True     |        |
+| `eggnogmapper_db_dir`    | Eggnogmapper database directory                                                                          | `string`  |         |          |        |
+| `eggnogmapper_tax_scope` | Eggnogmapper taxonomy scopre. Eukaryota: 2759, Viridiplantae: 33090, Archaea: 2157, Bacteria: 2, root: 1 | `integer` | 1       |          |
+
+|
+| `rna_evidence` | FASTQ/BAM samples listed in a CSV sheet | `string` | | | |
+| `liftoff_annotations` | Reference annotations listed in a CSV sheet | `string` | | | |
+| `orthofinder_annotations` | Additional annotations for orthology listed in a CSV sheet | `string` | | | |
+| `outdir` | The output directory where the results will be saved | `string` | | True | |
+| `email` | Email address for completion summary. | `string` | | | True |
 
 ## Repeat annotation options
 
@@ -68,10 +70,9 @@ A Nextflow pipeline for consensus, phased and pan-genome annotation.
 
 ## Annotation output options
 
-| Parameter                     | Description                          | Type      | Default | Required | Hidden |
-| ----------------------------- | ------------------------------------ | --------- | ------- | -------- | ------ |
-| `braker_save_outputs`         | Save BRAKER files                    | `boolean` |         |          |        |
-| `add_attrs_to_proteins_fasta` | Add gff attributes to proteins fasta | `boolean` |         |          |        |
+| Parameter             | Description       | Type      | Default | Required | Hidden |
+| --------------------- | ----------------- | --------- | ------- | -------- | ------ |
+| `braker_save_outputs` | Save BRAKER files | `boolean` |         |          |        |
 
 ## Evaluation options
 
@@ -104,3 +105,9 @@ Less common options for the pipeline, typically set in a config file.
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string`  | 25.MB   |          | True   |
 | `monochrome_logs`        | Do not use coloured log outputs.                                  | `boolean` |         |          | True   |
 | `hook_url`               | Incoming hook URL for messaging service                           | `string`  |         |          | True   |
+
+## Other parameters
+
+| Parameter                     | Description | Type      | Default | Required | Hidden |
+| ----------------------------- | ----------- | --------- | ------- | -------- | ------ |
+| `add_attrs_to_gffread_fastas` |             | `boolean` |         |          |        |

@@ -286,6 +286,11 @@
                     "type": "boolean",
                     "description": "Save BRAKER files",
                     "fa_icon": "fas fa-question-circle"
+                },
+                "add_attrs_to_proteins_cds_fastas": {
+                    "type": "boolean",
+                    "description": "Add gff attributes to proteins/cDNA/cds fasta",
+                    "fa_icon": "fas fa-question-circle"
                 }
             }
         },
@@ -433,10 +438,5 @@
         {
             "$ref": "#/$defs/generic_options"
         }
-    ],
-    "properties": {
-        "add_attrs_to_proteins_cds_fastas": {
-            "type": "boolean"
-        }
-    }
+    ]
 }

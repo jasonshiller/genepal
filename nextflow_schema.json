@@ -289,7 +289,7 @@
                 },
                 "add_attrs_to_proteins_cds_fastas": {
                     "type": "boolean",
-                    "description": "Add gff attributes to proteins/cDNA/cds fasta",
+                    "description": "Add gff attributes to proteins/cDNA/CDS fasta",
                     "fa_icon": "fas fa-question-circle"
                 }
             }

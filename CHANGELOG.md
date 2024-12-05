@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 'Added'
 
-1. Added cDNA and cds outputs to <OUTPUT_DIR>/annotations/<SAMPLE> directory [#118](https://github.com/Plant-Food-Research-Open/genepal/issues/118)
+1. Added cDNA and CDS outputs to <OUTPUT_DIR>/annotations/<SAMPLE> directory [#118](https://github.com/Plant-Food-Research-Open/genepal/issues/118)
 
 ## v0.5.0 - [21-Nov-2024]
 

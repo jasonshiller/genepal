@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.6.0 - [6-Dec-2024]
+## v0.6.0 - [10-Dec-2024]
 
 ### 'Added'
 
@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 1. Fixed an issue where TSEBRA failed because LIFTOFF lifted non-protein coding genes [#121](https://github.com/Plant-Food-Research-Open/genepal/issues/121)
 2. Switched branch name from `master` to `main` in the GHA CIs
+3. Fixed an issue in `genepal_report.Rmd` which caused the pangene matrix plot to fail when the number of clusters exceeded 65536 [#124](https://github.com/Plant-Food-Research-Open/genepal/issues/124)
+4. Fixed an issue where `GENEPALREPORT` process failed due to OOM kill signal from SLURM [#123](https://github.com/Plant-Food-Research-Open/genepal/issues/123)
 
 ### `Dependencies`
 

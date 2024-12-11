@@ -16,9 +16,6 @@
                     "AGAT_SPEXTRACTSEQUENCES": {
                         "agat": "v1.4.0"
                     },
-                    "AGAT_SPFILTERBYORFSIZE": {
-                        "agat": "v1.4.1"
-                    },
                     "BRAKER3": {
                         "braker3": "3.0.8",
                         "augustus": "3.5.0",
@@ -39,6 +36,9 @@
                     },
                     "FASTAVALIDATOR": {
                         "py_fasta_validator": 0.6
+                    },
+                    "FILTER_BY_ORF_SIZE": {
+                        "gffread": "0.12.7"
                     },
                     "FINAL_GFF_CHECK": {
                         "genometools": "1.6.5"
@@ -70,9 +70,9 @@
                 "stable paths": [
                     "a_thaliana.cdna.fasta:md5,12b9bef973e488640aec8c04ba3882fe",
                     "a_thaliana.cds.fasta:md5,b81060419355a590560f92aec8536281",
-                    "a_thaliana.gt.gff3:md5,8ab16549095f605ff8715ac4a3de58ed",
+                    "a_thaliana.gt.gff3:md5,528459cf9596523bf66de99d24c37e20",
                     "a_thaliana.pep.fasta:md5,4994c0393ca0245a1c57966d846d101e",
-                    "a_thaliana.gff3:md5,d23d16cd86499d48a30ffb981ed27891",
+                    "a_thaliana.gff3:md5,30adac1b21d7aaed6ca7fb71ab33f32d",
                     "summary_stats.json:md5,007ba5cf2b7a2fd395a27d9458ca2d2e"
                 ],
                 "stable names": [
@@ -97,6 +97,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-11T06:36:01.956188"
+        "timestamp": "2024-12-11T21:49:09.751422"
     }
 }

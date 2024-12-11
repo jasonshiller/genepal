@@ -1,6 +1,6 @@
 include { AGAT_SPMERGEANNOTATIONS               } from '../../modules/nf-core/agat/spmergeannotations/main'
 include { GT_GFF3                               } from '../../modules/nf-core/gt/gff3/main'
-include { AGAT_SPFILTERBYORFSIZE                } from '../../modules/gallvp/agat/spfilterbyorfsize/main'
+include { GFFREAD as FILTER_BY_ORF_SIZE         } from '../../modules/nf-core/gffread/main'
 include { AGAT_CONVERTSPGXF2GXF                 } from '../../modules/nf-core/agat/convertspgxf2gxf/main'
 
 workflow GFF_MERGE_CLEANUP {
@@ -31,18 +31,18 @@ workflow GFF_MERGE_CLEANUP {
                                 | mix ( ch_gff_branch.braker_only.map { meta, braker_gff, _liftoff_gff -> [ meta, braker_gff ] } )
     ch_versions                 = ch_versions.mix(AGAT_SPMERGEANNOTATIONS.out.versions.first())
 
-    // MODULE: AGAT_SPFILTERBYORFSIZE
+    // MODULE: GFFREAD as FILTER_BY_ORF_SIZE
     ch_filter_input             = ch_merged_gff
                                 | branch {
                                     filter: val_filter_by_aa_length != null
                                     pass: val_filter_by_aa_length == null
                                 }
 
-    AGAT_SPFILTERBYORFSIZE ( ch_filter_input.filter, [] )
+    FILTER_BY_ORF_SIZE ( ch_filter_input.filter, [] )
 
-    ch_filtered_gff             = AGAT_SPFILTERBYORFSIZE.out.passed_gff
+    ch_filtered_gff             = FILTER_BY_ORF_SIZE.out.gffread_gff
                                 | mix ( ch_filter_input.pass )
-    ch_versions                 = ch_versions.mix(AGAT_SPFILTERBYORFSIZE.out.versions.first())
+    ch_versions                 = ch_versions.mix(FILTER_BY_ORF_SIZE.out.versions.first())
 
     // MODULE: GT_GFF3
     GT_GFF3 ( ch_filtered_gff )

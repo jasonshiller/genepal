@@ -277,7 +277,7 @@
                     "type": "integer",
                     "default": 24,
                     "fa_icon": "fas fa-hashtag",
-                    "description": "Filter genes with open reading frames shorter than the specified number of amino acids. If set to `null`, this filter step is skipped.",
+                    "description": "Filter genes with open reading frames shorter than the specified number of amino acids excluding the stop codon. If set to `null`, this filter step is skipped.",
                     "minimum": 3
                 }
             }

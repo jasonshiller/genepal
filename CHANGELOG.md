@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 2. Switched branch name from `master` to `main` in the GHA CIs
 3. Fixed an issue in `genepal_report.Rmd` which caused the pangene matrix plot to fail when the number of clusters exceeded 65536 [#124](https://github.com/Plant-Food-Research-Open/genepal/issues/124)
 4. Fixed an issue where `GENEPALREPORT` process failed due to OOM kill signal from SLURM [#123](https://github.com/Plant-Food-Research-Open/genepal/issues/123)
+5. Fixed an issue where Gff merge after liftoff failed when one of the Gff files did not contain any genes
 
 ### `Dependencies`
 

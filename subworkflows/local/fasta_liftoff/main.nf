@@ -88,7 +88,26 @@ workflow FASTA_LIFTOFF {
     )
 
     ch_liftoff_gff3                 = LIFTOFF.out.polished_gff3
-                                    | map { meta, gff -> [ [ id: meta.target_assembly ], gff ] }
+                                    | map { meta, gff ->
+
+                                        def gene_count = gff.readLines()
+                                            .findAll { it ->
+                                                if ( it.startsWith('#') ) { return false }
+
+                                                def cols = it.split('\t')
+                                                def feat = cols[2]
+
+                                                if ( feat != 'gene' ) { return false }
+
+                                                return true
+                                            }.size()
+
+                                        // To avoid failure in AGAT_SPMERGEANNOTATIONS
+                                        // when one of the GFF files is empty
+                                        if ( gene_count < 1 ) { return null }
+
+                                        [ [ id: meta.target_assembly ], gff ]
+                                    }
                                     | groupTuple
 
     ch_versions                     = ch_versions.mix(LIFTOFF.out.versions.first())

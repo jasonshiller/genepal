@@ -1,0 +1,17 @@
+##gff-version 3
+scaffold_4	AGAT	gene	1766	5584	.	+	.	ID=gene28773;description=Hypothetical protein | no eggnog hit
+scaffold_4	Liftoff	mRNA	1766	5584	.	+	.	ID=gene28773.t1;Parent=gene28773;description=Hypothetical protein | no eggnog hit
+scaffold_4	Liftoff	exon	1766	4966	.	+	.	ID=gene28773.t1.exon1;Parent=gene28773.t1
+scaffold_4	Liftoff	exon	4968	5584	.	+	.	ID=gene28773.t1.exon2;Parent=gene28773.t1
+scaffold_4	Liftoff	CDS	2667	2951	.	+	0	ID=gene28773.t1.cds1;Parent=gene28773.t1
+scaffold_4	AGAT	five_prime_UTR	1766	2666	.	+	.	ID=agat-five_prime_utr-1269;Parent=gene28773.t1
+scaffold_4	Liftoff	intron	4967	4967	.	+	.	ID=intron_added-90678;Parent=gene28773.t1
+scaffold_4	AGAT	three_prime_UTR	2952	4966	.	+	.	ID=agat-three_prime_utr-854;Parent=gene28773.t1
+scaffold_4	AGAT	three_prime_UTR	4968	5584	.	+	.	ID=agat-three_prime_utr-855;Parent=gene28773.t1
+scaffold_4	AUGUSTUS	gene	90203	91055	.	-	.	ID=gene28774;description=F-box kelch-repeat protein
+scaffold_4	AUGUSTUS	mRNA	90203	91055	0.53	-	.	ID=gene28774.t1;Parent=gene28774;description=F-box kelch-repeat protein
+scaffold_4	AUGUSTUS	exon	90203	90819	.	-	.	ID=gene28774.t1.exon1;Parent=gene28774.t1
+scaffold_4	AUGUSTUS	exon	90887	91055	.	-	.	ID=gene28774.t1.exon2;Parent=gene28774.t1
+scaffold_4	AUGUSTUS	CDS	90203	90819	.	-	2	ID=gene28774.t1.cds1;Parent=gene28774.t1
+scaffold_4	AUGUSTUS	CDS	90887	91055	.	-	0	ID=gene28774.t1.cds2;Parent=gene28774.t1
+scaffold_4	AUGUSTUS	intron	90820	90886	.	-	.	ID=intron_added-90679;Parent=gene28774.t1

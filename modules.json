@@ -111,7 +111,7 @@
                     },
                     "gxf_fasta_agat_spaddintrons_spextractsequences": {
                         "branch": "main",
-                        "git_sha": "7bf6fbca23edc94490ffa6709f52b2f71c6fb130",
+                        "git_sha": "ed4146008dbdcfd4823252b456de32059e2d07f4",
                         "installed_by": ["subworkflows"]
                     }
                 }

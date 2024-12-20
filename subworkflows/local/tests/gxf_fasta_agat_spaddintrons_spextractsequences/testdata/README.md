@@ -1,0 +1,1 @@
+This test data is from an _Actinidia_ genome. To minify the data, the gene coordinates have been shifted back by 630000. The Gff file has a single bp intron which is not flagged by `agat_sp_flag_short_introns.pl` from version `quay.io/biocontainers/agat:1.4.1--pl5321hdfd78af_0`. See issue <https://github.com/NBISweden/AGAT/issues/516> for further details.

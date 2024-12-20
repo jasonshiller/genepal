@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v0.6.0 - [16-Dec-2024]
+## v0.6.0 - [20-Dec-2024]
 
 ### 'Added'
 
@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 3. Fixed an issue in `genepal_report.Rmd` which caused the pangene matrix plot to fail when the number of clusters exceeded 65536 [#124](https://github.com/Plant-Food-Research-Open/genepal/issues/124)
 4. Fixed an issue where `GENEPALREPORT` process failed due to OOM kill signal from SLURM [#123](https://github.com/Plant-Food-Research-Open/genepal/issues/123)
 5. Fixed an issue where Gff merge after liftoff failed when one of the Gff files did not contain any genes
+6. Fixed an issue where `gxf_fasta_agat_spaddintrons_spextractsequences` crashed due to short introns [#89](https://github.com/Plant-Food-Research-Open/genepal/issues/89)
 
 ### `Dependencies`
 

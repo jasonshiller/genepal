@@ -135,61 +135,61 @@ workflow GFF_MERGE_CLEANUP {
                                             return ( cols[0..7] + [ atts_g ] ).join('\t')
                                         }
 
-def tx_formatted_lines  = []
-def gene_counter        = 0
-def current_gene_id     = ''
-def current_mrna_id     = -1
-def current_exon_id     = -1
-def current_cds_id      = -1
+                                    def tx_formatted_lines  = []
+                                    def gene_counter        = 0
+                                    def current_gene_id     = ''
+                                    def current_mrna_id     = -1
+                                    def current_exon_id     = -1
+                                    def current_cds_id      = -1
 
-filtered_lines.each { line ->
-    if (line.startsWith('#')) {
-        tx_formatted_lines << line
-        return
-    }
-    def cols    = line.split('\t')
-    def feat    = cols[2]
-    def atts    = cols[8]
-    def id      = (atts =~ /ID=([^;]*)/)[0][1]
+                                    filtered_lines.each { line ->
+                                        if (line.startsWith('#')) {
+                                            tx_formatted_lines << line
+                                            return
+                                        }
+                                        def cols    = line.split('\t')
+                                        def feat    = cols[2]
+                                        def atts    = cols[8]
+                                        def id      = (atts =~ /ID=([^;]*)/)[0][1]
 
-    if (feat == 'gene') {
-        gene_counter += 1
-        def new_gene_id = "${meta.id}.g${gene_counter}"
-        def updated_atts = atts.replaceAll(/ID=[^;]+/, "ID=${new_gene_id}")
-        tx_formatted_lines << (cols[0..7] + [updated_atts]).join('\t')
-        current_gene_id = new_gene_id
-        current_mrna_id = 0
-        return
-    }
+                                        if (feat == 'gene') {
+                                            gene_counter += 1
+                                            def new_gene_id = "${meta.id}.g${gene_counter}"
+                                            def updated_atts = atts.replaceAll(/ID=[^;]+/, "ID=${new_gene_id}")
+                                            tx_formatted_lines << (cols[0..7] + [updated_atts]).join('\t')
+                                            current_gene_id = new_gene_id
+                                            current_mrna_id = 0
+                                            return
+                                        }
 
-    if (feat == 'mRNA') {
-        current_mrna_id += 1
-        current_exon_id = 0
-        current_cds_id = 0
-        def matches = (atts =~ /liftoffID=([^;]*)/)
-        def liftoffIDStr = matches ? ";liftoffID=${matches[0][1]}" : ''
-        tx_formatted_lines << (
-            (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id};Parent=${current_gene_id}${liftoffIDStr}"]).join('\t')
-        )
-        return
-    }
+                                        if (feat == 'mRNA') {
+                                            current_mrna_id += 1
+                                            current_exon_id = 0
+                                            current_cds_id = 0
+                                            def matches = (atts =~ /liftoffID=([^;]*)/)
+                                            def liftoffIDStr = matches ? ";liftoffID=${matches[0][1]}" : ''
+                                            tx_formatted_lines << (
+                                                (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id};Parent=${current_gene_id}${liftoffIDStr}"]).join('\t')
+                                            )
+                                            return
+                                        }
 
-    if (feat == 'exon') {
-        current_exon_id += 1
-        tx_formatted_lines << (
-            (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id}.exon${current_exon_id};Parent=${current_gene_id}.t${current_mrna_id}"]).join('\t')
-        )
-        return
-    }
+                                        if (feat == 'exon') {
+                                            current_exon_id += 1
+                                            tx_formatted_lines << (
+                                                (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id}.exon${current_exon_id};Parent=${current_gene_id}.t${current_mrna_id}"]).join('\t')
+                                            )
+                                            return
+                                        }
 
-    if (feat == 'CDS') {
-        current_cds_id += 1
-        tx_formatted_lines << (
-            (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id}.cds${current_cds_id};Parent=${current_gene_id}.t${current_mrna_id}"]).join('\t')
-        )
-        return
-    }
-}
+                                        if (feat == 'CDS') {
+                                            current_cds_id += 1
+                                            tx_formatted_lines << (
+                                                (cols[0..7] + ["ID=${current_gene_id}.t${current_mrna_id}.cds${current_cds_id};Parent=${current_gene_id}.t${current_mrna_id}"]).join('\t')
+                                            )
+                                            return
+                                        }
+                                    }
 
                                     [ "${meta.id}.agat.cleanup.gff" ] + [ tx_formatted_lines.join('\n') ]
                                 }

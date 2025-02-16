@@ -154,7 +154,7 @@ workflow GFF_MERGE_CLEANUP {
 
                                         if (feat == 'gene') {
                                             gene_counter += 1
-                                            def new_gene_id = "${meta.id}.g${gene_counter}"
+                                            def new_gene_id = append_genome_prefix ? "${meta.id}.g${gene_counter}" : "g${gene_counter}"
                                             def updated_atts = atts.replaceAll(/ID=[^;]+/, "ID=${new_gene_id}")
                                             tx_formatted_lines << (cols[0..7] + [updated_atts]).join('\t')
                                             current_gene_id = new_gene_id

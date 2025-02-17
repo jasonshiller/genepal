@@ -179,6 +179,7 @@ workflow GENEPAL {
     GFF_MERGE_CLEANUP(
         ch_braker_purged_gff,
         ch_liftoff_gff3,
+        params.append_genome_prefix,
         params.filter_genes_by_aa_length
     )
 

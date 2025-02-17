@@ -36,5 +36,6 @@
     "braker_save_outputs": false,
     "add_attrs_to_proteins_cds_fastas": false,
     "busco_skip": false,
-    "busco_lineage_datasets": "embryophyta_odb10"
+    "busco_lineage_datasets": "embryophyta_odb10",
+    "append_genome_prefix": true
 }

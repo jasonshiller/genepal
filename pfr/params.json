@@ -1,10 +1,10 @@
 {
-    "input": "/workspace/genepal/testdata/0.4.0/assemblysheet.csv",
+    "input": "/workspace/hrtjbs/test_out/small_assemblysheet.csv",
     "protein_evidence": "/workspace/genepal/testdata/0.4.0/external-protein-fastas.txt",
     "eggnogmapper_db_dir": "/workspace/ComparativeDataSources/emapperdb/5.0.2",
     "eggnogmapper_tax_scope": 33090,
-    "rna_evidence": "/workspace/genepal/testdata/0.4.0/rnasheet.csv",
-    "liftoff_annotations": "/workspace/genepal/testdata/0.4.0/liftoffannotations.csv",
+    "rna_evidence": "/workspace/hrtjbs/test_out/rna_small_set.csv",
+    "liftoff_annotations": "/workspace/hrtjbs/test_out/liftoffannotations.small.csv",
     "orthofinder_annotations": null,
     "outdir": "results",
     "email": null,
